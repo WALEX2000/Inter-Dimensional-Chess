@@ -28,7 +28,7 @@ namespace Chess.Pieces
     }
 
     [CreateAssetMenu(fileName = "ChessPiece", menuName = "Chess/Piece")]
-    public class PieceSO : ScriptableObject
+    public class PieceScriptableObject : ScriptableObject
     {
         public string piece_name;
         public PieceColor team;

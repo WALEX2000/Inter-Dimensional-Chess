@@ -4,9 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - White Piece
-  - Black Piece
-  - Block
+  - P
+  - p
+  - N
+  - n
+  - K
+  - k
+  - Q
+  - q
+  - B
+  - b
+  - R
+  - r
+  - '#'
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374bd26390877494f9aeb2665a920c47, type: 3}
+  m_Name: StandardTheme
+  m_EditorClassIdentifier: 
+  light_block_mat: {fileID: 2100000, guid: c33fa1a3ae4ea469c92555d02b6f4192, type: 2}
+  dark_block_mat: {fileID: 2100000, guid: 563d7127836764bda9e58ec9ff2f6d7e, type: 2}
+  light_piece_mat: {fileID: 2100000, guid: 4dd3211f0461e435b9abcf6a19d78b1d, type: 2}
+  dark_piece_mat: {fileID: 2100000, guid: 1e1f9f06910e84e1e979b0c48580c2c4, type: 2}
