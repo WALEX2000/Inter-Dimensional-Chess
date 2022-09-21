@@ -34,7 +34,6 @@ public class CameraController : MonoBehaviour
             zoom_distance -= zoom_diff * zoom_speed;
             zoom_distance = Mathf.Clamp(zoom_distance, zoom_min, zoom_max);
             transform.position = focal_point + zoom_direction * zoom_distance;
-            Debug.Log(transform.position);
         }
     }
 
