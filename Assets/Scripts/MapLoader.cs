@@ -7,6 +7,8 @@ using Chess.Board;
 public class MapLoader : MonoBehaviour
 {
     public BoardScriptableObject board_scriptable_object;
+
+    public Transform board_parent;
     void Start()
     {
         foreach (BoardElement board_element in board_scriptable_object.board_elem_list)
@@ -53,6 +55,7 @@ public class MapLoader : MonoBehaviour
 
     private void InstantiateBlock(int x, int y, int z, int w, string block_name) {
         GameObject block = (GameObject)Instantiate(Resources.Load("Prefabs/Blocks/"+block_name), new Vector3(x, y, z), Quaternion.identity);
+        block.transform.parent = board_parent;
         int index_sum = x + y + z;
         if (index_sum % 2 == 0)
         {
@@ -67,6 +70,7 @@ public class MapLoader : MonoBehaviour
     private void InstantiatePiece( string piece_name, char piece_val, int x, int y, int z, int w) {
         float y_pos = y - 0.5f;
         GameObject piece = (GameObject)Instantiate(Resources.Load("Prefabs/Pieces/"+piece_name), new Vector3(x, y_pos, z), Quaternion.identity);
+        piece.transform.parent = board_parent;
         piece.tag = piece_val.ToString();
         if(Char.IsLower(piece_val)) {
             piece.GetComponent<Renderer>().material = board_scriptable_object.color_theme_list[w].dark_piece_mat;

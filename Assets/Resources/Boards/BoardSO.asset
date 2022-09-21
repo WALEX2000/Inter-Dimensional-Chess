@@ -388,7 +388,7 @@ MonoBehaviour:
     y: 1
     z: 0
     w: 0
-  - element_value: 107
+  - element_value: 113
     x: 3
     y: 1
     z: 7
@@ -448,7 +448,7 @@ MonoBehaviour:
     y: 1
     z: 0
     w: 0
-  - element_value: 113
+  - element_value: 107
     x: 4
     y: 1
     z: 7
@@ -794,6 +794,6 @@ MonoBehaviour:
     z: 7
     w: 0
   color_theme_list:
-  - {fileID: 11400000, guid: 7220df8757f314d77923a404d16a6270, type: 2}
   - {fileID: 11400000, guid: 9ee085ffd98604e1f91c1202d2e3eaa2, type: 2}
+  - {fileID: 11400000, guid: 7220df8757f314d77923a404d16a6270, type: 2}
   board_name: Test Board
