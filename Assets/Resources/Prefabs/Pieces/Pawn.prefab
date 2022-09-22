@@ -111,3 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8a0294fc88447b3970da3c8a294e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hover_materail: {fileID: 2100000, guid: 99dec24e10610452581ec87274061d41, type: 2}
+  selected_materail: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}

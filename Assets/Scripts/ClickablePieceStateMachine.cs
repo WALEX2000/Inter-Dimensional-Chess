@@ -1,11 +1,9 @@
 namespace Chess.Pieces
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using System;
     using UnityEngine;
 
-    enum PieceState { // TODO: add Drag support
+    public enum PieceState { // TODO: add Drag support
         Idle,
         Hovered,
         Selected,
@@ -14,82 +12,42 @@ namespace Chess.Pieces
 
     public enum PieceCommand {
         PlayerEnter,
+        PlayerHover,
         PlayerLeave,
         EnemyEnter,
+        EnemyHover,
         EnemyLeave,
+        PlayerClick,
+        EnemyClick,
+        Deselect,
     }
 
-    public class ClickablePieceStateMachine
+    public static class ClickablePieceStateMachine
     {
-        private PieceState state = PieceState.Idle;
-        private List<Dictionary<PieceCommand, PieceState>> stateTransitions = new List<Dictionary<PieceCommand, PieceState>>();
-        private GameObject piece;
-        // Constructor
-        public ClickablePieceStateMachine(GameObject piece)
-        {
-            this.piece = piece;
+        private static Dictionary<PieceCommand, PieceState>[] stateTransitions = new Dictionary<PieceCommand, PieceState>[] {
+            new Dictionary<PieceCommand, PieceState>() { // Idle
+                { PieceCommand.PlayerEnter, PieceState.Hovered },
+                { PieceCommand.PlayerHover, PieceState.Hovered },
+                { PieceCommand.PlayerClick, PieceState.Selected },
+            },
+            new Dictionary<PieceCommand, PieceState>() { // Hovered
+                { PieceCommand.PlayerLeave, PieceState.Idle },
+                { PieceCommand.PlayerClick, PieceState.Selected },
+            },
+            new Dictionary<PieceCommand, PieceState>() { // Selected
+                { PieceCommand.Deselect, PieceState.Idle },
+            },
+            new Dictionary<PieceCommand, PieceState>() { // Played
 
-            // Create Idle transitions
-            stateTransitions.Add(new Dictionary<PieceCommand, PieceState>(){
-                {PieceCommand.PlayerEnter, PieceState.Hovered},
-            });
+            },
+        };
 
-            // Create Hovered transitions
-            stateTransitions.Add(new Dictionary<PieceCommand, PieceState>(){
-                {PieceCommand.PlayerLeave, PieceState.Idle},
-            });
-
-            // Create Selected transitions
-            stateTransitions.Add(new Dictionary<PieceCommand, PieceState>(){
-            });
-
-            // Create Played transitions
-            stateTransitions.Add(new Dictionary<PieceCommand, PieceState>(){
-            });
-
-        }
-
-        public void ApplyCommand(PieceCommand command) {
+        public static PieceState? ApplyCommand(PieceState state, PieceCommand command) {
             if(!stateTransitions[(int)state].TryGetValue(command, out PieceState nextState)) {
-                return;  // Transition doesn't exist, so do nothing
+                return null;  // Transition doesn't exist, so return null
             } else {
-                state = nextState;
-                ExecuteState();
+                return nextState;
             }            
-        }
-
-        private void ExecuteState() {
-            switch(state) {
-                case PieceState.Idle:
-                    EnterIdle();
-                    break;
-                case PieceState.Hovered:
-                    EnterHovered();
-                    break;
-                case PieceState.Selected:
-                    EnterSelected();
-                    break;
-                case PieceState.Played:
-                    EnterPlayed();
-                    break;
-            }
-        }
-
-        private void EnterIdle() {
-            // TODO: Change color to default
-        }
-
-        private void EnterHovered() {
-            // TODO: Add outline glow effect
-        }
-
-        private void EnterSelected() {
-            // TODO: Show possible moves
-        }
-
-        private void EnterPlayed() {
-            // TODO: Change piece position
-            // End Turn
         }
     }
 }
