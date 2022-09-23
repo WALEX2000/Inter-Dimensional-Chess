@@ -12,10 +12,7 @@ namespace Chess.Pieces
         private PieceState state;
 
         private Material idle_material;
-
-        public Material hover_materail;
-
-        public Material selected_materail;
+        public Material hover_materail, selected_materail; // TODO: Move materials to either a SO or the ColorTheme SO
         
         private void Start() {
             if(Char.IsLower(this.tag[0])) {
@@ -26,7 +23,7 @@ namespace Chess.Pieces
         }
 
         private bool PlayingTurn() {
-            return GameManager.Instance.IsWhiteTurn = white_team;
+            return GameManager.Instance.isWhiteTurn = white_team;
         }
 
         private void OnMouseEnter()
@@ -70,10 +67,12 @@ namespace Chess.Pieces
 
         private void OnMouseDrag()
         { // Holding down Mouse button after clicking on piece
+            //Move the piece and highlight which block it would fall into if released
         }
 
         private void OnMouseUp()
         { // Release Click
+            // If the piece is in the correct position, then release it
         }
 
         private void OnMouseUpAsButton()
@@ -116,11 +115,10 @@ namespace Chess.Pieces
         private void EnterSelected() {
             GameManager.Instance.SelectPiece(this);
             this.GetComponent<MeshRenderer>().material = selected_materail;
-            // TODO: Show possible moves
         }
 
         private void EnterPlayed() {
-            // TODO: Change piece position
+            // TODO: Change piece position (Maybe I don't need this state)
             // Remove Selection effects (Go back to idle looks)
             // End Turn
         }

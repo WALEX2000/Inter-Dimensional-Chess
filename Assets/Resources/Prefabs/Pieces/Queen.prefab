@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4607164402640316}
   - component: {fileID: 33386584874682660}
   - component: {fileID: 23714218359197728}
+  - component: {fileID: -4677814773536733212}
+  - component: {fileID: -2483297404210926059}
   m_Layer: 0
   m_Name: Queen
   m_TagString: Untagged
@@ -83,3 +85,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4677814773536733212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945632463053948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8a0294fc88447b3970da3c8a294e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover_materail: {fileID: 2100000, guid: 99dec24e10610452581ec87274061d41, type: 2}
+  selected_materail: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}
+--- !u!136 &-2483297404210926059
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945632463053948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.43817496
+  m_Height: 1.7013237
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8506619, z: 0}

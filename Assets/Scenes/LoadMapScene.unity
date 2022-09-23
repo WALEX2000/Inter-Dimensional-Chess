@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bb820e701794ef891f316afd80b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board_scriptable_object: {fileID: 11400000, guid: ab5420153be51496a99dd03d488c98e4,
+  board_scriptable_object: {fileID: 11400000, guid: ed8bb498b11534e29a9c68fc6f990eae,
     type: 2}
   board_parent: {fileID: 964782758}
 --- !u!4 &1772538638
