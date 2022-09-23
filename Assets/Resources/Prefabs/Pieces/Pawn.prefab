@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23160403841118764}
   - component: {fileID: 6869624158728594290}
   - component: {fileID: 559859093921394944}
+  - component: {fileID: -3926120450618567382}
   m_Layer: 0
   m_Name: Pawn
   m_TagString: Untagged
@@ -113,3 +114,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hover_materail: {fileID: 2100000, guid: 99dec24e10610452581ec87274061d41, type: 2}
   selected_materail: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}
+--- !u!114 &-3926120450618567382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006356879557798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1516b0c4aff714ef2979145d3bb274b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

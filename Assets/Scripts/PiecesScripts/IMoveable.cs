@@ -2,6 +2,13 @@ namespace Chess.Pieces
 {
     using System.Collections.Generic;
     using Chess.Board;
+
+    public enum MoveOutcome {
+        Valid,
+        Invalid,
+        Capture,
+    }
+
     public struct Move {
         public BoardPosition start_position;
         public BoardPosition end_position;
