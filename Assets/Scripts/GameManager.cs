@@ -84,7 +84,6 @@ namespace Chess.Game
                 DestroyImmediate(tmp.GetChild(0).gameObject);
             }
             foreach(Move move in possibleMoves) {
-                Debug.Log(move.end_position.x + " " + move.end_position.y + " " + move.end_position.z + " " + move.end_position.w);
                 // TODO: Show possible moves on the screen (properly)
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.transform.parent = tmp;

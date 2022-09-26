@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4967576429096158}
   - component: {fileID: 33961714295525734}
   - component: {fileID: 23756955892116760}
+  - component: {fileID: 2726594872467911617}
+  - component: {fileID: -7921017977379099275}
+  - component: {fileID: 7383951130655588736}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -83,3 +86,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2726594872467911617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992623236052302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a0a45f3bb424ecc8845c681b2632c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7921017977379099275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992623236052302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8a0294fc88447b3970da3c8a294e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover_materail: {fileID: 2100000, guid: c079d78ecff434258911807644b2a33f, type: 2}
+  selected_materail: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}
+--- !u!136 &7383951130655588736
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992623236052302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4478585
+  m_Height: 1.25607
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.628035, z: 0.027925223}

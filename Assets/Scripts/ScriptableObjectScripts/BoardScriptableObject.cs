@@ -24,6 +24,10 @@ namespace Chess.Board
             _ => throw new IndexOutOfRangeException("BoardPosition Index must be between 0 and 3"),
         };
 
+        public BoardPosition add (BoardPosition other) {
+            return new BoardPosition(this.x + other.x, this.y + other.y, this.z + other.z, this.w + other.w);
+        }
+
         public void setValue(int index, int value) {
             switch (index)
             {
