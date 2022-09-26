@@ -60,7 +60,7 @@ namespace Chess.Game
                         break;
                 }
 
-                GameManager.Instance.SetBoardElement(element, position);
+                GameManager.Instance.AddBoardElement(element, position);
             }
         }
 

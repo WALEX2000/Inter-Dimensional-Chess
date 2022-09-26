@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bb820e701794ef891f316afd80b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board_scriptable_object: {fileID: 11400000, guid: ed8bb498b11534e29a9c68fc6f990eae,
+  board_scriptable_object: {fileID: 11400000, guid: 494191f515769449d9587fd62d7994aa,
     type: 2}
   board_parent: {fileID: 964782758}
 --- !u!4 &1772538638
@@ -399,6 +399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 495903913}
+  moveIndicatorPrefab: {fileID: 7776868072718193621, guid: bcd00fd673ed245189ef4d89a70a267c,
+    type: 3}
   isWhiteTurn: 1
 --- !u!4 &2002648040
 Transform:

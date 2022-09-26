@@ -6,10 +6,9 @@ namespace Chess.Pieces
     using Chess.Game;
     using Chess.Board;
 
-    public class PawnMoves : MonoBehaviour, IMoveable
+    public class PawnMoves : PieceMovement
     {
-        private bool FirstMove = true;
-        public void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToList(ref List<Move> moves)
         {
             BoardPosition start_pos = GameManager.Instance.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             GenForwardPawnMoves(ref moves, start_pos, 1); // y
@@ -22,6 +21,8 @@ namespace Chess.Pieces
                 GenPawnCaptureMoves(ref moves, start_pos, 2, 0, -1); // z/x
             }
             GenForwardPawnMoves(ref moves, start_pos, 3); // w
+
+            GenPawnCaptureMoves(ref moves, start_pos, 1, 0); // y/x
         }
 
         private void GenPawnCaptureMoves(ref List<Move> moves, BoardPosition start_pos, int forward_axis_index, int lateral_axis_index, int multiplier = 1)

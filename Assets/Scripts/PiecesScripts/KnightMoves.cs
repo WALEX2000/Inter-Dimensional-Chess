@@ -6,7 +6,7 @@ namespace Chess.Pieces
     using Chess.Game;
     using Chess.Board;
 
-    public class KnightMoves : MonoBehaviour, IMoveable
+    public class KnightMoves : PieceMovement
     {
         private BoardPosition[] possibleMoves = new BoardPosition[] {
             new BoardPosition(1, 2, 0, 0),
@@ -58,7 +58,7 @@ namespace Chess.Pieces
             new BoardPosition(0, 0, -2, 1),
             new BoardPosition(0, 0, -2, -1),
         };
-        public void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToList(ref List<Move> moves)
         {
             BoardPosition start_pos = GameManager.Instance.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             foreach (BoardPosition possible_pos in possibleMoves)

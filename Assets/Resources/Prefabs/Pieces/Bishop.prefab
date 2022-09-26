@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4626390214331530}
   - component: {fileID: 33283243407640938}
   - component: {fileID: 23450358156907978}
+  - component: {fileID: -6122288675935359821}
+  - component: {fileID: -3467393645467133793}
+  - component: {fileID: -3399419199739916894}
   m_Layer: 0
   m_Name: Bishop
   m_TagString: Untagged
@@ -83,3 +86,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &-6122288675935359821
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028868664329696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.43817496
+  m_Height: 1.5062299
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75311494, z: 0}
+--- !u!114 &-3467393645467133793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028868664329696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8a0294fc88447b3970da3c8a294e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover_materail: {fileID: 2100000, guid: c079d78ecff434258911807644b2a33f, type: 2}
+  selected_materail: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}
+--- !u!114 &-3399419199739916894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028868664329696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b3fa99d54844f25b4291ac65cf5b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

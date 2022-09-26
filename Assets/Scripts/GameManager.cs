@@ -27,6 +27,7 @@ namespace Chess.Game
         }
 
         public Transform tmp; // TODO: Delete this
+        public GameObject moveIndicatorPrefab;
 
         // Game Functions
         private GameObject[,,,] boardMatrix = new GameObject[12, 12, 12, 12]; // Max Board Size (TODO Change to something more centralized)
@@ -41,7 +42,7 @@ namespace Chess.Game
                 return null; // TODO I need to handle this better somehow
             }
         }
-        public void SetBoardElement(GameObject element, BoardPosition position) {
+        public void AddBoardElement(GameObject element, BoardPosition position) {
             boardMatrix[position.x, position.y, position.z, position.w] = element;
             if(IsElementWhite(element)) {
                 whitePieces.Add(element, new List<Move>());
@@ -56,14 +57,19 @@ namespace Chess.Game
             return new BoardPosition((int)position.x, yPos, (int)position.z, 0);
         }
 
+        public Vector3 BoardPositionIntoVector3(BoardPosition position) { // TODO Must change this to handle w values
+            float yPos = position.y - 0.5f;
+            return new Vector3(position.x, yPos, position.z);
+        }
+
         public void StartTurn() {
             // Calculate possible moves for each piece of the playing team
             ref Dictionary<GameObject, List<Move>> playerPieces = ref (isWhiteTurn ? ref whitePieces : ref blackPieces);
             List<GameObject> keys = new List<GameObject>(playerPieces.Keys);
             foreach(GameObject piece in keys) {
-                IMoveable[] moveables = piece.GetComponents<IMoveable>();
+                PieceMovement[] moveables = piece.GetComponents<PieceMovement>();
                 List<Move> pieceMoves = new List<Move>();
-                foreach(IMoveable moveable in moveables) {
+                foreach(PieceMovement moveable in moveables) {
                     moveable.GenerateMovesToList(ref pieceMoves);
                 }
                 playerPieces[piece] = pieceMoves;
@@ -72,24 +78,56 @@ namespace Chess.Game
 
         public void EndTurn() {
             isWhiteTurn = !isWhiteTurn;
+            StartTurn();
         }
         private ClickablePiece selected_piece = null;
         public void SelectPiece(ClickablePiece piece) {
             if(selected_piece != null) {
                 selected_piece.Deselect();
+                DestroySelectMarkers();
             }
             selected_piece = piece;
             List<Move> possibleMoves = (isWhiteTurn ? whitePieces[piece.gameObject] : blackPieces[piece.gameObject]);
-            while (tmp.childCount > 0) {
-                DestroyImmediate(tmp.GetChild(0).gameObject);
-            }
             foreach(Move move in possibleMoves) {
                 // TODO: Show possible moves on the screen (properly)
-                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                sphere.transform.parent = tmp;
-                sphere.transform.localPosition = new Vector3(move.end_position.x, move.end_position.y, move.end_position.z);
-                sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                GameObject moveIndicator = Instantiate(moveIndicatorPrefab, tmp);
+                moveIndicator.transform.localPosition = new Vector3(move.end_position.x, move.end_position.y, move.end_position.z);
+                moveIndicator.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             }
+        }
+
+        private void DestroySelectMarkers() {
+            while (tmp.childCount > 0) { // TODO Change this
+                DestroyImmediate(tmp.GetChild(0).gameObject);
+            }
+        }
+
+        public void MovePiece(Transform moveIndicator) {
+            BoardPosition movePosition = TransformIntoBoardPosition(moveIndicator);
+            BoardPosition originalPosition = TransformIntoBoardPosition(selected_piece.transform);
+            selected_piece.Deselect();
+            DestroySelectMarkers();
+            // TODO: This isn't very good practice but it works for now
+            PieceMovement pieceMovement = selected_piece.GetComponent<PieceMovement>();
+            pieceMovement.MovePiece();
+            // Delete the eaten piece, if any
+            GameObject enemyPiece = GetBoardElement(movePosition);
+            if(enemyPiece != null) {
+                if(IsElementWhite(enemyPiece)) {
+                    whitePieces.Remove(enemyPiece);
+                } else if(IsElementBlack(enemyPiece)) {
+                    blackPieces.Remove(enemyPiece);
+                }
+                Destroy(enemyPiece);
+            }
+            // Change the position of the selected piece on the Board Matrix
+            boardMatrix[movePosition.x, movePosition.y, movePosition.z, movePosition.w] = selected_piece.gameObject;
+            boardMatrix[originalPosition.x, originalPosition.y, originalPosition.z, originalPosition.w] = null;
+            // Change the position of the selected piece on the Game world
+            Vector3 piecePosition = BoardPositionIntoVector3(movePosition);
+            selected_piece.transform.localPosition = piecePosition;
+            selected_piece = null;
+            EndTurn();
         }
 
         // Possible Moves

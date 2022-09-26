@@ -23,7 +23,7 @@ namespace Chess.Pieces
         }
 
         private bool PlayingTurn() {
-            return GameManager.Instance.isWhiteTurn = white_team;
+            return GameManager.Instance.isWhiteTurn == white_team;
         }
 
         private void OnMouseEnter()
