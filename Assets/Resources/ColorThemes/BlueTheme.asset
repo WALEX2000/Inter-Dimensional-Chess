@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ed696138c5f5490abb6a510467edf68, type: 3}
-  m_Name: StandardTheme
+  m_Name: BlueTheme
   m_EditorClassIdentifier: 
-  light_block_mat: {fileID: 2100000, guid: c33fa1a3ae4ea469c92555d02b6f4192, type: 2}
-  dark_block_mat: {fileID: 2100000, guid: 563d7127836764bda9e58ec9ff2f6d7e, type: 2}
-  light_piece_mat: {fileID: 2100000, guid: 4dd3211f0461e435b9abcf6a19d78b1d, type: 2}
-  dark_piece_mat: {fileID: 2100000, guid: 1e1f9f06910e84e1e979b0c48580c2c4, type: 2}
+  light_block_mat: {fileID: 2100000, guid: 1a2749e60fd274902bfe860eedb2df59, type: 2}
+  dark_block_mat: {fileID: 2100000, guid: 878862591f11e45a1a08d2e95bacd0c5, type: 2}
+  light_piece_mat: {fileID: 2100000, guid: 3063e2e3b4bc545fd96ee228140dea4e, type: 2}
+  dark_piece_mat: {fileID: 2100000, guid: 71ee6a168cc9345b08e93f3d50932c6a, type: 2}

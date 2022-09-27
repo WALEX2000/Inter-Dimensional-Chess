@@ -63,11 +63,21 @@ namespace Chess.Board
         }
     }
 
+    [Serializable] public struct Dimension {
+        public List<BoardElement> dimensionElements;
+        public ColorThemeSO colorTheme;
+
+        // Constructor
+        public Dimension(ColorThemeSO colorTheme)
+        {
+            dimensionElements = new List<BoardElement>();
+            this.colorTheme = colorTheme;
+        }
+    }
+
     [CreateAssetMenu(fileName = "ChessBoard", menuName = "Chess/Board")]
-    public class BoardScriptableObject : ScriptableObject
+    public class BoardSO : ScriptableObject
     {
-        public List<BoardElement> board_elem_list = new List<BoardElement>();
-        public List<ColorThemeScriptableObject> color_theme_list = new List<ColorThemeScriptableObject>();
-        public string board_name;
+        public List<Dimension> dimensions = new List<Dimension>();
     }
 }

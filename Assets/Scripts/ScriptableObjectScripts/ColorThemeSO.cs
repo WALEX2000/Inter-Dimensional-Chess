@@ -6,7 +6,7 @@ namespace Chess.Board
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "ColorTheme", menuName = "Chess/Theme")]
-    public class ColorThemeScriptableObject : ScriptableObject
+    public class ColorThemeSO : ScriptableObject
     {
         public Material light_block_mat;
         public Material dark_block_mat;
