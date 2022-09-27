@@ -398,10 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7033414ffe4b24970909e0bef9b7eb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWhiteTurn: 1
   tmp: {fileID: 495903913}
   moveIndicatorPrefab: {fileID: 7776868072718193621, guid: bcd00fd673ed245189ef4d89a70a267c,
     type: 3}
-  isWhiteTurn: 1
 --- !u!4 &2002648040
 Transform:
   m_ObjectHideFlags: 0

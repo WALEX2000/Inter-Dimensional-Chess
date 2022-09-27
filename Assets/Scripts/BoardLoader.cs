@@ -16,7 +16,7 @@ namespace Chess.Game
         { // TODO: Remove this later
           // load the board
             LoadBoard();
-            GameManager.Instance.StartTurn();
+            GameManager.Instance.GameBoard.StartTurn();
         }
         void LoadBoard()
         {
@@ -60,7 +60,7 @@ namespace Chess.Game
                         break;
                 }
 
-                GameManager.Instance.AddBoardElement(element, position);
+                GameManager.Instance.GameBoard.AddBoardElement(element, position);
             }
         }
 

@@ -10,19 +10,21 @@ namespace Chess.Pieces
     {
         public override void GenerateMovesToList(ref List<Move> moves)
         {
-            BoardPosition start_pos = GameManager.Instance.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
+            BoardPosition start_pos = GameManager.Instance.GameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             GenForwardPawnMoves(ref moves, start_pos, 1); // y
-            if(GameManager.Instance.IsElementWhite(this.gameObject)) {
+            GenForwardPawnMoves(ref moves, start_pos, 1, -1); // -y
+            GenForwardPawnMoves(ref moves, start_pos, 3); // w
+            if(GameManager.Instance.GameBoard.IsElementWhite(this.gameObject)) {
                 GenForwardPawnMoves(ref moves, start_pos, 2); // z
                 GenPawnCaptureMoves(ref moves, start_pos, 2, 0); // z/x
-            }
-            else {
+            } else {
                 GenForwardPawnMoves(ref moves, start_pos, 2, -1); // z
                 GenPawnCaptureMoves(ref moves, start_pos, 2, 0, -1); // z/x
             }
-            GenForwardPawnMoves(ref moves, start_pos, 3); // w
-
+            
             GenPawnCaptureMoves(ref moves, start_pos, 1, 0); // y/x
+            GenPawnCaptureMoves(ref moves, start_pos, 1, 0, -1); // -y/x
+            GenPawnCaptureMoves(ref moves, start_pos, 3, 0); // w/x
         }
 
         private void GenPawnCaptureMoves(ref List<Move> moves, BoardPosition start_pos, int forward_axis_index, int lateral_axis_index, int multiplier = 1)
@@ -37,12 +39,12 @@ namespace Chess.Pieces
             Move move_1 = new Move(start_pos, end_pos_1);
             Move move_2 = new Move(start_pos, end_pos_2);
 
-            MoveOutcome moveOutcome_1 = GameManager.Instance.CheckMoveRules(this.gameObject, move_1);
+            MoveOutcome moveOutcome_1 = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move_1);
             if(moveOutcome_1 == MoveOutcome.Capture) {
                 moves.Add(move_1);
             }
 
-            MoveOutcome moveOutcome_2 = GameManager.Instance.CheckMoveRules(this.gameObject, move_2);
+            MoveOutcome moveOutcome_2 = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move_2);
             if(moveOutcome_2 == MoveOutcome.Capture) {
                 moves.Add(move_2);
             }
@@ -54,16 +56,16 @@ namespace Chess.Pieces
             BoardPosition end_pos = new BoardPosition(start_pos);
             end_pos.setValue(axis_index, start_axis_val + 1 * multiplier);
             Move move = new Move(start_pos, end_pos);
-            MoveOutcome moveOutcome = GameManager.Instance.CheckMoveRules(this.gameObject, move);
-            if (moveOutcome is MoveOutcome.Invalid || moveOutcome is MoveOutcome.Capture) return;
+            MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
             if (moveOutcome is MoveOutcome.Valid) moves.Add(move);
+            else return;
 
-            if (FirstMove) {
+            if (firstMove) {
                 end_pos.setValue(axis_index, start_axis_val + 2 * multiplier);
                 move = new Move(start_pos, end_pos);
-                moveOutcome = GameManager.Instance.CheckMoveRules(this.gameObject, move);
-                if (moveOutcome is MoveOutcome.Invalid || moveOutcome is MoveOutcome.Capture) return;
+                moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
                 if (moveOutcome is MoveOutcome.Valid) moves.Add(move);
+                else return;
             }
         }
     }

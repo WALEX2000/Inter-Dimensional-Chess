@@ -9,6 +9,8 @@ namespace Chess.Pieces
         Valid,
         Invalid,
         Capture,
+        Check,
+        FriendlyCapture,
     }
 
     public struct Move {
@@ -21,11 +23,11 @@ namespace Chess.Pieces
     }
     public abstract class PieceMovement : MonoBehaviour
     {
-        protected bool FirstMove = true;
+        protected bool firstMove = true;
         public abstract void GenerateMovesToList(ref List<Move> pieceMoves);
 
         public void MovePiece() {
-            FirstMove = false;
+            firstMove = false;
         }
 
         protected void GenSlidingStraightMoves(ref List<Move> moves, BoardPosition start_pos, int axis_index, bool positive = true, bool negative = true, int maxRange = 100) { // TODO: Change 100 to something proper
@@ -39,7 +41,7 @@ namespace Chess.Pieces
                     end_pos.setValue(axis_index, i);
                     Move move = new Move(start_pos, end_pos);
 
-                    MoveOutcome moveOutcome = GameManager.Instance.CheckMoveRules(this.gameObject, move);
+                    MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
                     if (moveOutcome is MoveOutcome.Valid) {
                         moves.Add(move);
                         continue;
@@ -74,7 +76,7 @@ namespace Chess.Pieces
                     end_pos.setValue(axis_index_2, j);
                     Move move = new Move(start_pos, end_pos);
 
-                    MoveOutcome moveOutcome = GameManager.Instance.CheckMoveRules(this.gameObject, move);
+                    MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
                     if (moveOutcome is MoveOutcome.Valid) {
                         moves.Add(move);
                         continue;

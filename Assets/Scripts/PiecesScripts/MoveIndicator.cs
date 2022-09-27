@@ -9,7 +9,7 @@ namespace Chess.Pieces
     public class MoveIndicator : MonoBehaviour {
         private void OnMouseDown()
         { // Click on MoveIndicator
-            GameManager.Instance.MovePiece(transform);
+            GameManager.Instance.GameBoard.MovePiece(transform);
         }
     }
 }
