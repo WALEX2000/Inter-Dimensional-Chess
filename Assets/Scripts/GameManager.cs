@@ -26,9 +26,55 @@ namespace Chess.Game
             _instance = this;
         }
 
-        public ChessBoard GameBoard = new ChessBoard();
+        // Constants
+        public const string GUIHolderObjectName = "GUIHolder";
+
+        // Class Fields and Methods
+        public ChessBoard gameBoard = new ChessBoard();
+        public Transform boardTransform;
         public bool isWhiteTurn = true;
-        public Transform tmp; // TODO: Delete this
+
+        // Piece Selection
         public GameObject moveIndicatorPrefab; // TODO: Delete this
+        private ClickablePiece selectedPiece = null;
+        public void SelectPiece(ClickablePiece piece) {
+            DeselectPiece(); // deselect previous piece
+
+            selectedPiece = piece;
+            List<Move> possibleMoves = gameBoard.GetPieceMoves(piece.gameObject);
+
+            foreach(Move move in possibleMoves) {
+                // TODO: Give special material to moveIndicator if it is a capture
+                BoardPosition indicatorPosition = move.endPosition;
+                Transform guiTransform = boardTransform.GetChild(indicatorPosition.w).Find(GUIHolderObjectName);
+                
+                GameObject moveIndicator = GameObject.Instantiate(moveIndicatorPrefab, guiTransform);
+                Vector3 indicatorPositionVector = new Vector3(indicatorPosition.x, indicatorPosition.y - 0.49f, indicatorPosition.z);
+                moveIndicator.transform.localPosition = indicatorPositionVector;
+                moveIndicator.GetComponent<MoveIndicator>().setMove(move);
+                
+                // set capture material if move is a capture
+                GameObject capturedPiece = gameBoard.GetBoardElement(move.endPosition);
+                if (gameBoard.IsElementBlack(capturedPiece) || gameBoard.IsElementWhite(capturedPiece)) {
+                    moveIndicator.GetComponent<MoveIndicator>().setCaptureMat();
+                }
+            }
+        }
+
+        public void DeselectPiece() {
+            if(selectedPiece is null) return;
+            selectedPiece.Deselect();
+            selectedPiece = null;
+            DestroySelectionIndicators();
+        }
+
+        private void DestroySelectionIndicators() {
+            foreach(Transform dimension in boardTransform) {
+                Transform guiHolder = dimension.Find(GUIHolderObjectName);
+                while(guiHolder.childCount > 0) {
+                    DestroyImmediate(guiHolder.GetChild(0).gameObject);
+                }
+            }
+        }
     }
 }

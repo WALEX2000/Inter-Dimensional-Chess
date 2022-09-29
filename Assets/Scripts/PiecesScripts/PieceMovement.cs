@@ -9,16 +9,15 @@ namespace Chess.Pieces
         Valid,
         Invalid,
         Capture,
-        Check,
         FriendlyCapture,
     }
 
     public struct Move {
-        public BoardPosition start_position;
-        public BoardPosition end_position;
-        public Move(BoardPosition start_position, BoardPosition end_position) {
-            this.start_position = start_position;
-            this.end_position = end_position;
+        public BoardPosition startPosition;
+        public BoardPosition endPosition;
+        public Move(BoardPosition startPosition, BoardPosition endPosition) {
+            this.startPosition = startPosition;
+            this.endPosition = endPosition;
         }
     }
     public abstract class PieceMovement : MonoBehaviour
@@ -41,7 +40,7 @@ namespace Chess.Pieces
                     end_pos.setValue(axis_index, i);
                     Move move = new Move(start_pos, end_pos);
 
-                    MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
+                    MoveOutcome moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
                     if (moveOutcome is MoveOutcome.Valid) {
                         moves.Add(move);
                         continue;
@@ -76,7 +75,7 @@ namespace Chess.Pieces
                     end_pos.setValue(axis_index_2, j);
                     Move move = new Move(start_pos, end_pos);
 
-                    MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
+                    MoveOutcome moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
                     if (moveOutcome is MoveOutcome.Valid) {
                         moves.Add(move);
                         continue;

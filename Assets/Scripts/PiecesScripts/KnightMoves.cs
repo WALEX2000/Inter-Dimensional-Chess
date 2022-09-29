@@ -60,12 +60,12 @@ namespace Chess.Pieces
         };
         public override void GenerateMovesToList(ref List<Move> moves)
         {
-            BoardPosition start_pos = GameManager.Instance.GameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
+            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             foreach (BoardPosition possible_pos in possibleMoves)
             {
                 BoardPosition new_pos = start_pos.add(possible_pos);
                 Move move = new Move(start_pos, new_pos);
-                MoveOutcome moveOutcome = GameManager.Instance.GameBoard.CheckMoveRules(this.gameObject, move);
+                MoveOutcome moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
                 if (moveOutcome == MoveOutcome.Valid || moveOutcome == MoveOutcome.Capture)
                     moves.Add(move);
             }

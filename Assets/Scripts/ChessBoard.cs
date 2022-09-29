@@ -1,29 +1,45 @@
 namespace Chess.Board {
     
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using Chess.Pieces;
     using Chess.Game;
     using System;
 
-    public class ChessBoard {
-        public readonly int MAX_X_SIZE = 12;
-        public readonly int MAX_Y_SIZE = 12;
-        public readonly int MAX_Z_SIZE = 12;
-        public readonly int MAX_W_SIZE = 6;
+    public class ChessBoard
+    { /* Holds all the infromation about the the board:
+        - Board Size
+        - Board structure across all dimensions
+        - Piece position
+        - Possible Piece movement
+        - Piece movement history
+        */
+        public int MAX_X_SIZE {get; private set;}
+        public int MAX_Y_SIZE {get; private set;}
+        public int MAX_Z_SIZE {get; private set;}
+        public int MAX_W_SIZE {get; private set;}
         private GameObject[,,,] boardMatrix;
-        private List<Move> moveList = new List<Move>();
-        private Dictionary<GameObject, List<Move>> whitePieces = new Dictionary<GameObject, List<Move>>();
-        private Dictionary<GameObject, List<Move>> blackPieces = new Dictionary<GameObject, List<Move>>();
-        private ClickablePiece selected_piece = null;
+        private List<Move> moveHistory = new List<Move>();
+        private Dictionary<GameObject, List<Move>> whitePiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
+        private Dictionary<GameObject, List<Move>> blackPiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
+        private List<GameObject> dimensionObjects = new List<GameObject>(); // TODO: Maybe move this somewhere else so this class is just about the board
 
+        // Board General Methods
         public ChessBoard(int xSize = 12, int ySize = 12, int zSize = 12, int wSize = 6) {
             MAX_X_SIZE = xSize;
             MAX_Y_SIZE = ySize;
             MAX_Z_SIZE = zSize;
             MAX_W_SIZE = wSize;
             boardMatrix = new GameObject[MAX_X_SIZE, MAX_Y_SIZE, MAX_Z_SIZE, MAX_W_SIZE];
+        }
+
+        public void AddBoardElement(GameObject element, BoardPosition position) {
+            boardMatrix[position.x, position.y, position.z, position.w] = element;
+            if(IsElementWhite(element)) {
+                whitePiecesMoveCollection.Add(element, new List<Move>());
+            } else if(IsElementBlack(element)) {
+                blackPiecesMoveCollection.Add(element, new List<Move>());
+            }
         }
 
         public GameObject GetBoardElement(BoardPosition pos) {
@@ -34,106 +50,71 @@ namespace Chess.Board {
             }
         }
 
-        public void AddBoardElement(GameObject element, BoardPosition position) {
-            boardMatrix[position.x, position.y, position.z, position.w] = element;
-            if(IsElementWhite(element)) {
-                whitePieces.Add(element, new List<Move>());
-            } else if(IsElementBlack(element)) {
-                blackPieces.Add(element, new List<Move>());
-            }
+        public void AddDimensionObject(GameObject dimensionObject) {
+            dimensionObjects.Add(dimensionObject);
         }
 
-        public BoardPosition TransformIntoBoardPosition(Transform transform) { // TODO Must change this to handle w values
+        public BoardPosition TransformIntoBoardPosition(Transform transform) {
             Vector3 position = transform.localPosition;
             int yPos = (int) Mathf.Ceil(position.y);
-            return new BoardPosition((int)position.x, yPos, (int)position.z, 0);
+            int wPos = int.Parse(transform.parent.name);
+            return new BoardPosition((int)position.x, yPos, (int)position.z, wPos);
         }
 
-        public Vector3 BoardPositionIntoVector3(BoardPosition position) { // TODO Must change this to handle w values
+        private GameObject GetDimensionObject(BoardPosition position) { // TODO: Handle IndexOutOfRange.
+            return dimensionObjects[position.w];
+        }
+
+        private Vector3 BoardPositionIntoVector3(BoardPosition position) {
             float yPos = position.y - 0.5f;
             return new Vector3(position.x, yPos, position.z);
         }
 
-        public void SelectPiece(ClickablePiece piece) {
-            if(selected_piece != null) {
-                selected_piece.Deselect();
-                DestroySelectMarkers();
-            }
-            selected_piece = piece;
-            List<Move> possibleMoves = (GameManager.Instance.isWhiteTurn ? whitePieces[piece.gameObject] : blackPieces[piece.gameObject]);
-            foreach(Move move in possibleMoves) {
-                // TODO: Show possible moves on the screen (properly)
-                GameObject moveIndicator = GameObject.Instantiate(GameManager.Instance.moveIndicatorPrefab, GameManager.Instance.tmp);
-                moveIndicator.transform.localPosition = new Vector3(move.end_position.x, move.end_position.y, move.end_position.z);
-                moveIndicator.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            }
-        }
-
-        // Game Functions
-        public void StartTurn() {
-            // Calculate possible moves for each piece of the playing team
-            ref Dictionary<GameObject, List<Move>> playerPieces = ref (GameManager.Instance.isWhiteTurn ? ref whitePieces : ref blackPieces);
-            List<GameObject> keys = new List<GameObject>(playerPieces.Keys);
-            foreach(GameObject piece in keys) {
-                PieceMovement[] moveables = piece.GetComponents<PieceMovement>();
-                List<Move> pieceMoves = new List<Move>();
-                foreach(PieceMovement moveable in moveables) {
-                    moveable.GenerateMovesToList(ref pieceMoves);
-                }
-                playerPieces[piece] = pieceMoves;
-            }
-        }
-
-        public void EndTurn() {
-            GameManager.Instance.isWhiteTurn = !GameManager.Instance.isWhiteTurn;
-            StartTurn();
-        }
-
-        private void DestroySelectMarkers() {
-            while (GameManager.Instance.tmp.childCount > 0) { // TODO Change this
-                GameObject.DestroyImmediate(GameManager.Instance.tmp.GetChild(0).gameObject);
-            }
-        }
-
-        public void MovePiece(Transform moveIndicator) {
-            BoardPosition movePosition = TransformIntoBoardPosition(moveIndicator);
-            BoardPosition originalPosition = TransformIntoBoardPosition(selected_piece.transform);
-            selected_piece.Deselect();
-            DestroySelectMarkers();
+        // Piece Movement / Selection Methods
+        public void MakeMove(Move move) {
+            BoardPosition startPosition = move.startPosition;
+            BoardPosition endPosition = move.endPosition;
+            GameObject movedPiece = GetBoardElement(startPosition);
+            
             // TODO: This isn't very good practice but it works for now
-            PieceMovement pieceMovement = selected_piece.GetComponent<PieceMovement>();
+            PieceMovement pieceMovement = movedPiece.GetComponent<PieceMovement>();
             pieceMovement.MovePiece();
             // Delete the eaten piece, if any
-            GameObject enemyPiece = GetBoardElement(movePosition);
+            GameObject enemyPiece = GetBoardElement(endPosition);
             if(enemyPiece != null) {
                 if(IsElementWhite(enemyPiece)) {
-                    whitePieces.Remove(enemyPiece);
+                    whitePiecesMoveCollection.Remove(enemyPiece);
                 } else if(IsElementBlack(enemyPiece)) {
-                    blackPieces.Remove(enemyPiece);
+                    blackPiecesMoveCollection.Remove(enemyPiece);
                 }
                 GameObject.Destroy(enemyPiece);
             }
             // Change the position of the selected piece on the Board Matrix
-            boardMatrix[movePosition.x, movePosition.y, movePosition.z, movePosition.w] = selected_piece.gameObject;
-            boardMatrix[originalPosition.x, originalPosition.y, originalPosition.z, originalPosition.w] = null;
+            boardMatrix[endPosition.x, endPosition.y, endPosition.z, endPosition.w] = movedPiece;
+            boardMatrix[startPosition.x, startPosition.y, startPosition.z, startPosition.w] = null;
+            
             // Change the position of the selected piece on the Game world
-            Vector3 piecePosition = BoardPositionIntoVector3(movePosition);
-            selected_piece.transform.localPosition = piecePosition;
-            selected_piece = null;
+            movedPiece.transform.parent = GetDimensionObject(endPosition).transform;
+            Vector3 piecePosition = BoardPositionIntoVector3(endPosition);
+            movedPiece.transform.localPosition = piecePosition;
+            moveHistory.Add(move);
+
+            GameManager.Instance.DeselectPiece();
             EndTurn();
         }
 
         // Possible Moves
         public MoveOutcome CheckMoveRules(GameObject piece, Move move) { // Checks if Move is valid according to Board Rules
+            // TODO: Remove Debugs
             // CHECK ALL GAME RULES
             // Can't move into blocks
-            GameObject endObj = GetBoardElement(move.end_position);
+            GameObject endObj = GetBoardElement(move.endPosition);
             if (IsElementBlock(endObj)) {
                 // Debug.Log("Object at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is a block!");
                 return MoveOutcome.Invalid;
             }
             // Can't fly TODO: this doesn't work for "w" i think
-            BoardPosition below_end_pos = new BoardPosition(move.end_position.x, move.end_position.y - 1, move.end_position.z, move.end_position.w);
+            BoardPosition below_end_pos = new BoardPosition(move.endPosition.x, move.endPosition.y - 1, move.endPosition.z, move.endPosition.w);
             if(!IsElementBlock(GetBoardElement(below_end_pos))) { // This element has to be a block
                 // Debug.Log("Position at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is floating!");
                 return MoveOutcome.Invalid; // TODO This is dependent upon GetBoardElement returning null if the position is out of bounds
@@ -152,6 +133,43 @@ namespace Chess.Board {
             // CHECK ALL PIECE SPECIFIC RULES
             // Debug.Log("VALID: (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ")");
             return MoveOutcome.Valid;
+        }
+
+        public List<Move> GetPieceMoves(GameObject piece) {
+            if(IsElementWhite(piece)) {
+                return whitePiecesMoveCollection[piece];
+            } else if(IsElementBlack(piece)) {
+                return blackPiecesMoveCollection[piece];
+            } else return null;
+        }
+
+        // Game Function Methods
+        public void StartTurn() {
+            // Calculate possible moves for each piece of the playing team
+            ref Dictionary<GameObject, List<Move>> playerPieces = ref (GameManager.Instance.isWhiteTurn ? ref whitePiecesMoveCollection : ref blackPiecesMoveCollection);
+            List<GameObject> keys = new List<GameObject>(playerPieces.Keys);
+            foreach(GameObject piece in keys) {
+                PieceMovement[] moveables = piece.GetComponents<PieceMovement>();
+                List<Move> pieceMoves = new List<Move>();
+                foreach(PieceMovement moveable in moveables) {
+                    moveable.GenerateMovesToList(ref pieceMoves);
+                }
+                foreach(Move move in pieceMoves) {
+                    // Check if there are any Checks or Checkmates
+                }
+                playerPieces[piece] = pieceMoves;
+            }
+        }
+
+        public void EndTurn() {
+            GameManager.Instance.isWhiteTurn = !GameManager.Instance.isWhiteTurn;
+            StartTurn();
+        }
+
+
+        // Misc Methods
+        public bool isKing(GameObject piece) {
+            return piece.tag == "k" || piece.tag == "K";
         }
 
         public bool IsElementBlock(GameObject element) {

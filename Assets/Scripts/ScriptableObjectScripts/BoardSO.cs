@@ -21,7 +21,7 @@ namespace Chess.Board
             1 => y,
             2 => z,
             3 => w,
-            _ => throw new IndexOutOfRangeException("BoardPosition Index must be between 0 and 3"),
+            _ => throw new IndexOutOfRangeException("BoardPosition get Index must be between 0 and 3"),
         };
 
         public BoardPosition add (BoardPosition other) {
@@ -44,7 +44,7 @@ namespace Chess.Board
                     w = value;
                     break;
                 default:
-                    throw new IndexOutOfRangeException("BoardPosition Index must be between 0 and 3");
+                    throw new IndexOutOfRangeException("BoardPosition setValue Index must be between 0 and 3");
             }
         }
 

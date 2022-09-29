@@ -21,8 +21,17 @@ public class CameraController : MonoBehaviour
         Zoom(Input.GetAxis("Mouse ScrollWheel"));
         if(!Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)) {
             CamOrbit(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        } else if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)) {
+            CamPan(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
         transform.LookAt(focal_point);
+    }
+
+    void CamPan(float x, float y) {
+        // move camera left/right and up/down
+        Vector3 translation = new Vector3(-x, -y, 0) * rotation_speed;
+        transform.Translate(translation);
+        focal_point += translation;
     }
 
     private void Zoom(float zoom_diff) {

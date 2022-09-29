@@ -10,7 +10,7 @@ namespace Chess.Pieces
     {
         public override void GenerateMovesToList(ref List<Move> moves)
         {
-            BoardPosition start_pos = GameManager.Instance.GameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
+            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             GenSlidingStraightMoves(ref moves, start_pos, 0, maxRange: 1); // x
             GenSlidingStraightMoves(ref moves, start_pos, 1, maxRange: 1); // y
             GenSlidingStraightMoves(ref moves, start_pos, 2, maxRange: 1); // z
@@ -42,7 +42,7 @@ namespace Chess.Pieces
             for (int i = 0; i <= 2; i++) {
                 check_pos.setValue(axis_index, start_axis_val + i);
                 Move move = new Move(start_pos, check_pos);
-                MoveOutcome outcome = GameManager.Instance.GameBoard.CheckMoveRules(gameObject, move);
+                MoveOutcome outcome = GameManager.Instance.gameBoard.CheckMoveRules(gameObject, move);
                 if (outcome is not MoveOutcome.Valid) return;
             }
 

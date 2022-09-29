@@ -9,21 +9,29 @@ namespace Chess.Game
     public class BoardLoader : MonoBehaviour
     {
         public BoardSO boardScriptableObject;
-        public Transform boardParent;
+
+        private const int X_DIM_OFFSET = 10;
+        private const int Y_DIM_OFFSET = 0;
+        private const int Z_DIM_OFFSET = 0;
 
         private void Start()
         { // TODO: Remove this later if i don't want to load on Start
             LoadDimensions();
-            GameManager.Instance.GameBoard.StartTurn();
+            GameManager.Instance.gameBoard.StartTurn();
         }
 
         private void LoadDimensions() {
             for (int i = 0; i < boardScriptableObject.dimensions.Count; i++)
             {
                 // Create empty child of boardParent
-                GameObject dimensionParent = new GameObject("Dimension " + i);
-                dimensionParent.transform.parent = boardParent;
-                dimensionParent.transform.localPosition = new Vector3(i*10,0,0);
+                GameObject dimensionParent = new GameObject(i.ToString());
+                dimensionParent.transform.parent = GameManager.Instance.boardTransform;
+                dimensionParent.transform.localPosition = new Vector3(i*X_DIM_OFFSET,i*Y_DIM_OFFSET,i*Z_DIM_OFFSET);
+                GameObject dimensionGUIHolder = new GameObject(GameManager.GUIHolderObjectName);
+                dimensionGUIHolder.transform.parent = dimensionParent.transform;
+                dimensionGUIHolder.transform.localPosition = Vector3.zero;
+
+                GameManager.Instance.gameBoard.AddDimensionObject(dimensionParent);
                 InstantiateDimensionElements(boardScriptableObject.dimensions[i], dimensionParent.transform);
             }
         }
@@ -70,7 +78,7 @@ namespace Chess.Game
                         break;
                 }
 
-                GameManager.Instance.GameBoard.AddBoardElement(element, position);
+                GameManager.Instance.gameBoard.AddBoardElement(element, position);
             }
         }
 

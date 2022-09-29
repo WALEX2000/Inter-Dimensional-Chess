@@ -10,7 +10,7 @@ namespace Chess.Pieces
     {
         public override void GenerateMovesToList(ref List<Move> moves)
         {
-            BoardPosition start_pos = GameManager.Instance.GameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
+            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             GenSlidingDiagonalMoves(ref moves, start_pos, 0,1); // x/y
             GenSlidingDiagonalMoves(ref moves, start_pos, 0,2); // x/z
             GenSlidingDiagonalMoves(ref moves, start_pos, 0,3); // x/w
