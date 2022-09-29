@@ -14,10 +14,7 @@ namespace Chess.Board {
         - Possible Piece movement
         - Piece movement history
         */
-        public int MAX_X_SIZE {get; private set;}
-        public int MAX_Y_SIZE {get; private set;}
-        public int MAX_Z_SIZE {get; private set;}
-        public int MAX_W_SIZE {get; private set;}
+        public readonly int[] boardBoundaries;
         private GameObject[,,,] boardMatrix;
         private List<Move> moveHistory = new List<Move>();
         private Dictionary<GameObject, List<Move>> whitePiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
@@ -27,11 +24,8 @@ namespace Chess.Board {
 
         // Board General Methods
         public ChessBoard(int xSize = 12, int ySize = 12, int zSize = 12, int wSize = 6) {
-            MAX_X_SIZE = xSize;
-            MAX_Y_SIZE = ySize;
-            MAX_Z_SIZE = zSize;
-            MAX_W_SIZE = wSize;
-            boardMatrix = new GameObject[MAX_X_SIZE, MAX_Y_SIZE, MAX_Z_SIZE, MAX_W_SIZE];
+            boardBoundaries = new int[] { xSize, ySize, zSize, wSize };
+            boardMatrix = new GameObject[xSize, ySize, zSize, wSize];
         }
 
         public void AddBoardElement(GameObject element, BoardPosition position) {
@@ -138,7 +132,7 @@ namespace Chess.Board {
                 if(moveHistory.Count > 0) {
                     Move lastMove = moveHistory[moveHistory.Count - 1];
                     if ((lastMove.outcome & MoveOutcome.AfterImage) != 0 &&
-                        lastMove.afterImage.afterImagePosition == move.endPosition &&
+                        lastMove.afterImage.afterImagePosition.IsEqual(move.endPosition) &&
                         !IsTeamEqual(piece, lastMove.afterImage.afterImageOwner))
                     { // Passing into an enemy after image
                         move.outcome |= MoveOutcome.EnPassant;

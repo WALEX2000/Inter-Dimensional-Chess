@@ -33,7 +33,6 @@ namespace Chess.Game
 
         public ChessBoard gameBoard = new ChessBoard();
         public Transform boardTransform;
-        public UnityEvent turnEndEvent = new UnityEvent();
 
         // Game Function Methods
         public bool isWhiteTurn = true;
@@ -43,7 +42,6 @@ namespace Chess.Game
 
         public void EndTurn() {
             isWhiteTurn = !isWhiteTurn;
-            turnEndEvent.Invoke();
             StartTurn();
         }
 

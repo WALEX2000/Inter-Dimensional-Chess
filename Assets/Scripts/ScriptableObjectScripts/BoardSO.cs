@@ -24,12 +24,8 @@ namespace Chess.Board
             _ => throw new IndexOutOfRangeException("BoardPosition get Index must be between 0 and 3"),
         };
 
-        public static bool operator == (BoardPosition first, BoardPosition second) {
-            return (second.x == first.x && second.y == first.y && second.z == first.z && second.w == first.w);
-        }
-
-        public static bool operator != (BoardPosition first, BoardPosition second) {
-            return !(second.x == first.x && second.y == first.y && second.z == first.z && second.w == first.w);
+        public bool IsEqual(BoardPosition other) {
+            return (other.x == this.x && other.y == this.y && other.z == this.z && other.w == this.w);
         }
 
         public BoardPosition Add (BoardPosition other) {

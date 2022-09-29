@@ -15,7 +15,7 @@ namespace Chess.Game
         private const int Z_DIM_OFFSET = 0;
 
         private void Start()
-        { // TODO: Remove this later if i don't want to load on Start
+        {
             LoadDimensions();
             GameManager.Instance.StartTurn();
         }

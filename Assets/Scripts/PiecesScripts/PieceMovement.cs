@@ -49,16 +49,16 @@ namespace Chess.Pieces
             firstMove = false;
         }
 
-        protected void GenSlidingStraightMoves(ref List<Move> moves, BoardPosition start_pos, int axis_index, bool positive = true, bool negative = true, int maxRange = 100) { // TODO: Change 100 to something proper
-            int start_axis_val = start_pos[axis_index];
+        protected void GenSlidingStraightMoves(ref List<Move> moves, BoardPosition startPosition, int axisIndex, bool positive = true, bool negative = true, int maxRange = Int32.MaxValue) {
+            int start_axis_val = startPosition[axisIndex];
             if(positive) LoopMoves(ref moves, start_axis_val, 1);
             if(negative) LoopMoves(ref moves, start_axis_val, -1);
 
             void LoopMoves(ref List<Move> moves, int start_axis_val, int increment_val) {
-                for (int i = start_axis_val + increment_val, n = 0; i < 12 && i >= 0 && n < maxRange; i += increment_val, n++) { // TODO Change 12 to something more centralized
-                    BoardPosition end_pos = new BoardPosition(start_pos);
-                    end_pos.SetValue(axis_index, i);
-                    Move move = new Move(start_pos, end_pos);
+                for (int i = start_axis_val + increment_val, n = 0; i < GameManager.Instance.gameBoard.boardBoundaries[axisIndex] && i >= 0 && n < maxRange; i += increment_val, n++) {
+                    BoardPosition end_pos = new BoardPosition(startPosition);
+                    end_pos.SetValue(axisIndex, i);
+                    Move move = new Move(startPosition, end_pos);
 
                     GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
                     if ((move.outcome & MoveOutcome.BasicMove) != 0) {
@@ -76,24 +76,27 @@ namespace Chess.Pieces
             }
         }
 
-        protected void GenSlidingDiagonalMoves(ref List<Move> moves, BoardPosition start_pos, int axis_index_1, int axis_index_2, bool diagonal = true, bool anti_diagonal = true, int maxRange = 100) {
-            int start_axis_val_1 = start_pos[axis_index_1];
-            int start_axis_val_2 = start_pos[axis_index_2];
+        protected void GenSlidingDiagonalMoves(ref List<Move> moves, BoardPosition startPosition, int axisIndex_1, int axisIndex_2, bool diagonal = true, bool antiDiagonal = true, int maxRange = Int32.MaxValue) {
+            int start_axis_val_1 = startPosition[axisIndex_1];
+            int start_axis_val_2 = startPosition[axisIndex_2];
             if(diagonal) {
                 LoopMoves(ref moves, start_axis_val_1, start_axis_val_2, 1, 1);
                 LoopMoves(ref moves, start_axis_val_1, start_axis_val_2, -1, -1);
             }
-            if(anti_diagonal) {
+            if(antiDiagonal) {
                 LoopMoves(ref moves, start_axis_val_1, start_axis_val_2, 1, -1);
                 LoopMoves(ref moves, start_axis_val_1, start_axis_val_2, -1, 1);
             }
 
-            void LoopMoves(ref List<Move> moves, int start_axis_val_1, int start_axis_val_2, int increment_val_1, int increment_val_2) {
-                for (int i = start_axis_val_1 + increment_val_1, j = start_axis_val_2 + increment_val_2, n = 0; i < 12 && i >= 0 && j < 12 && j >= 0 & n < maxRange; i += increment_val_1, j += increment_val_2, n++) { // TODO Change 12 to something more centralized
-                    BoardPosition end_pos = new BoardPosition(start_pos);
-                    end_pos.SetValue(axis_index_1, i);
-                    end_pos.SetValue(axis_index_2, j);
-                    Move move = new Move(start_pos, end_pos);
+            void LoopMoves(ref List<Move> moves, int startAxisVal_1, int startAxisVal_2, int incrementVal_1, int incrementVal_2) {
+                for (int i = startAxisVal_1 + incrementVal_1, j = startAxisVal_2 + incrementVal_2, n = 0;
+                    i < GameManager.Instance.gameBoard.boardBoundaries[axisIndex_1] && i >= 0 && j < GameManager.Instance.gameBoard.boardBoundaries[axisIndex_2] && j >= 0 & n < maxRange;
+                    i += incrementVal_1, j += incrementVal_2, n++)
+                {
+                    BoardPosition endPosition = new BoardPosition(startPosition);
+                    endPosition.SetValue(axisIndex_1, i);
+                    endPosition.SetValue(axisIndex_2, j);
+                    Move move = new Move(startPosition, endPosition);
 
                     GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
                     if ((move.outcome & MoveOutcome.BasicMove) != 0) {
