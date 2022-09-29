@@ -29,13 +29,22 @@ namespace Chess.Game
         // Constants
         public const string GUIHolderObjectName = "GUIHolder";
 
-        // Class Fields and Methods
         public ChessBoard gameBoard = new ChessBoard();
         public Transform boardTransform;
+
+        // Game Function Methods
         public bool isWhiteTurn = true;
+        public void StartTurn() {
+            gameBoard.CalculateTeamMoves(isWhiteTurn);
+        }
+
+        public void EndTurn() {
+            isWhiteTurn = !isWhiteTurn;
+            StartTurn();
+        }
 
         // Piece Selection
-        public GameObject moveIndicatorPrefab; // TODO: Delete this
+        public GameObject moveIndicatorPrefab;
         private ClickablePiece selectedPiece = null;
         public void SelectPiece(ClickablePiece piece) {
             DeselectPiece(); // deselect previous piece
@@ -44,7 +53,6 @@ namespace Chess.Game
             List<Move> possibleMoves = gameBoard.GetPieceMoves(piece.gameObject);
 
             foreach(Move move in possibleMoves) {
-                // TODO: Give special material to moveIndicator if it is a capture
                 BoardPosition indicatorPosition = move.endPosition;
                 Transform guiTransform = boardTransform.GetChild(indicatorPosition.w).Find(GUIHolderObjectName);
                 

@@ -17,7 +17,7 @@ namespace Chess.Game
         private void Start()
         { // TODO: Remove this later if i don't want to load on Start
             LoadDimensions();
-            GameManager.Instance.gameBoard.StartTurn();
+            GameManager.Instance.StartTurn();
         }
 
         private void LoadDimensions() {

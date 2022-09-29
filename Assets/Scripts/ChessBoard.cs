@@ -100,7 +100,7 @@ namespace Chess.Board {
             moveHistory.Add(move);
 
             GameManager.Instance.DeselectPiece();
-            EndTurn();
+            GameManager.Instance.EndTurn();
         }
 
         // Possible Moves
@@ -143,10 +143,9 @@ namespace Chess.Board {
             } else return null;
         }
 
-        // Game Function Methods
-        public void StartTurn() {
+        public void CalculateTeamMoves(bool whiteTeam) {
             // Calculate possible moves for each piece of the playing team
-            ref Dictionary<GameObject, List<Move>> playerPieces = ref (GameManager.Instance.isWhiteTurn ? ref whitePiecesMoveCollection : ref blackPiecesMoveCollection);
+            ref Dictionary<GameObject, List<Move>> playerPieces = ref (whiteTeam ? ref whitePiecesMoveCollection : ref blackPiecesMoveCollection);
             List<GameObject> keys = new List<GameObject>(playerPieces.Keys);
             foreach(GameObject piece in keys) {
                 PieceMovement[] moveables = piece.GetComponents<PieceMovement>();
@@ -160,12 +159,6 @@ namespace Chess.Board {
                 playerPieces[piece] = pieceMoves;
             }
         }
-
-        public void EndTurn() {
-            GameManager.Instance.isWhiteTurn = !GameManager.Instance.isWhiteTurn;
-            StartTurn();
-        }
-
 
         // Misc Methods
         public bool isKing(GameObject piece) {
