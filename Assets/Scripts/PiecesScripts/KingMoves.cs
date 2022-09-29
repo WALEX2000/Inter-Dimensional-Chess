@@ -8,25 +8,24 @@ namespace Chess.Pieces
 
     public class KingMoves : PieceMovement
     {
-        public override void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToListImplementation(ref List<Move> moves, BoardPosition startPosition)
         {
-            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
-            GenSlidingStraightMoves(ref moves, start_pos, 0, maxRange: 1); // x
-            GenSlidingStraightMoves(ref moves, start_pos, 1, maxRange: 1); // y
-            GenSlidingStraightMoves(ref moves, start_pos, 2, maxRange: 1); // z
-            GenSlidingStraightMoves(ref moves, start_pos, 3, maxRange: 1); // w
+            GenSlidingStraightMoves(ref moves, startPosition, 0, maxRange: 1); // x
+            GenSlidingStraightMoves(ref moves, startPosition, 1, maxRange: 1); // y
+            GenSlidingStraightMoves(ref moves, startPosition, 2, maxRange: 1); // z
+            GenSlidingStraightMoves(ref moves, startPosition, 3, maxRange: 1); // w
 
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,1, maxRange: 1); // x/y
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,2, maxRange: 1); // x/z
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,3, maxRange: 1); // x/w
-            GenSlidingDiagonalMoves(ref moves, start_pos, 1,2, maxRange: 1); // y/z
-            GenSlidingDiagonalMoves(ref moves, start_pos, 1,3, maxRange: 1); // y/w
-            GenSlidingDiagonalMoves(ref moves, start_pos, 2,3, maxRange: 1); // z/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,1, maxRange: 1); // x/y
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,2, maxRange: 1); // x/z
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,3, maxRange: 1); // x/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 1,2, maxRange: 1); // y/z
+            GenSlidingDiagonalMoves(ref moves, startPosition, 1,3, maxRange: 1); // y/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 2,3, maxRange: 1); // z/w
 
             // TODO: Missing Castle Moves
             if(firstMove) {
                 // try castle on x axis
-                GenCastleMoves(ref moves, start_pos, 0);
+                GenCastleMoves(ref moves, startPosition, 0);
                 // try castle on w axis
                 // try castle on y axis
             }

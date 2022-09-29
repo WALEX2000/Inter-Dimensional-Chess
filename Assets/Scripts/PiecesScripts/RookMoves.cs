@@ -8,13 +8,12 @@ namespace Chess.Pieces
 
     public class RookMoves : PieceMovement
     {
-        public override void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToListImplementation(ref List<Move> moves, BoardPosition startPosition)
         {
-            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
-            GenSlidingStraightMoves(ref moves, start_pos, 0); // x
-            GenSlidingStraightMoves(ref moves, start_pos, 1); // y
-            GenSlidingStraightMoves(ref moves, start_pos, 2); // z
-            GenSlidingStraightMoves(ref moves, start_pos, 3); // w
+            GenSlidingStraightMoves(ref moves, startPosition, 0); // x
+            GenSlidingStraightMoves(ref moves, startPosition, 1); // y
+            GenSlidingStraightMoves(ref moves, startPosition, 2); // z
+            GenSlidingStraightMoves(ref moves, startPosition, 3); // w
         }
     }
 }

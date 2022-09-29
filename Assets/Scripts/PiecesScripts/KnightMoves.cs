@@ -58,13 +58,12 @@ namespace Chess.Pieces
             new BoardPosition(0, 0, -2, 1),
             new BoardPosition(0, 0, -2, -1),
         };
-        public override void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToListImplementation(ref List<Move> moves, BoardPosition startPosition)
         {
-            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             foreach (BoardPosition possible_pos in possibleMoves)
             {
-                BoardPosition new_pos = start_pos.Add(possible_pos);
-                Move move = new Move(start_pos, new_pos);
+                BoardPosition newPosition = startPosition.Add(possible_pos);
+                Move move = new Move(startPosition, newPosition);
                 GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
                 if (move.outcome == MoveOutcome.BasicMove || move.outcome == MoveOutcome.Capture)
                     moves.Add(move);

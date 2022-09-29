@@ -39,7 +39,11 @@ namespace Chess.Pieces
     public abstract class PieceMovement : MonoBehaviour
     {
         protected bool firstMove = true;
-        public abstract void GenerateMovesToList(ref List<Move> pieceMoves);
+        public void GenerateMovesToList(ref List<Move> pieceMoves) {
+            BoardPosition startPosition = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform);
+            GenerateMovesToListImplementation(ref pieceMoves, startPosition);
+        }
+        public abstract void GenerateMovesToListImplementation(ref List<Move> pieceMoves, BoardPosition startPosition);
 
         public void MovePiece() {
             firstMove = false;

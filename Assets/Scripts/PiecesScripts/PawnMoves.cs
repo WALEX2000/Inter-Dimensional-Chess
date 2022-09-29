@@ -8,23 +8,22 @@ namespace Chess.Pieces
 
     public class PawnMoves : PieceMovement
     {
-        public override void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToListImplementation(ref List<Move> moves, BoardPosition startPosition)
         {
-            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
-            GenForwardPawnMoves(ref moves, start_pos, 1); // y
-            GenForwardPawnMoves(ref moves, start_pos, 1, -1); // -y
-            GenForwardPawnMoves(ref moves, start_pos, 3); // w
+            GenForwardPawnMoves(ref moves, startPosition, 1); // y
+            GenForwardPawnMoves(ref moves, startPosition, 1, -1); // -y
+            GenForwardPawnMoves(ref moves, startPosition, 3); // w
             if(GameManager.Instance.gameBoard.IsElementWhite(this.gameObject)) {
-                GenForwardPawnMoves(ref moves, start_pos, 2); // z
-                GenPawnCaptureMoves(ref moves, start_pos, 2, 0); // z/x
+                GenForwardPawnMoves(ref moves, startPosition, 2); // z
+                GenPawnCaptureMoves(ref moves, startPosition, 2, 0); // z/x
             } else {
-                GenForwardPawnMoves(ref moves, start_pos, 2, -1); // z
-                GenPawnCaptureMoves(ref moves, start_pos, 2, 0, -1); // z/x
+                GenForwardPawnMoves(ref moves, startPosition, 2, -1); // z
+                GenPawnCaptureMoves(ref moves, startPosition, 2, 0, -1); // z/x
             }
             
-            GenPawnCaptureMoves(ref moves, start_pos, 1, 0); // y/x
-            GenPawnCaptureMoves(ref moves, start_pos, 1, 0, -1); // -y/x
-            GenPawnCaptureMoves(ref moves, start_pos, 3, 0); // w/x
+            GenPawnCaptureMoves(ref moves, startPosition, 1, 0); // y/x
+            GenPawnCaptureMoves(ref moves, startPosition, 1, 0, -1); // -y/x
+            GenPawnCaptureMoves(ref moves, startPosition, 3, 0); // w/x
         }
 
         private void GenPawnCaptureMoves(ref List<Move> moves, BoardPosition start_pos, int forward_axis_index, int lateral_axis_index, int multiplier = 1)

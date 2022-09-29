@@ -8,20 +8,19 @@ namespace Chess.Pieces
 
     public class QueenMoves : PieceMovement
     {
-        public override void GenerateMovesToList(ref List<Move> moves)
+        public override void GenerateMovesToListImplementation(ref List<Move> moves, BoardPosition startPosition)
         {
-            BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
-            GenSlidingStraightMoves(ref moves, start_pos, 0); // x
-            GenSlidingStraightMoves(ref moves, start_pos, 1); // y
-            GenSlidingStraightMoves(ref moves, start_pos, 2); // z
-            GenSlidingStraightMoves(ref moves, start_pos, 3); // w
+            GenSlidingStraightMoves(ref moves, startPosition, 0); // x
+            GenSlidingStraightMoves(ref moves, startPosition, 1); // y
+            GenSlidingStraightMoves(ref moves, startPosition, 2); // z
+            GenSlidingStraightMoves(ref moves, startPosition, 3); // w
 
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,1); // x/y
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,2); // x/z
-            GenSlidingDiagonalMoves(ref moves, start_pos, 0,3); // x/w
-            GenSlidingDiagonalMoves(ref moves, start_pos, 1,2); // y/z
-            GenSlidingDiagonalMoves(ref moves, start_pos, 1,3); // y/w
-            GenSlidingDiagonalMoves(ref moves, start_pos, 2,3); // z/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,1); // x/y
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,2); // x/z
+            GenSlidingDiagonalMoves(ref moves, startPosition, 0,3); // x/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 1,2); // y/z
+            GenSlidingDiagonalMoves(ref moves, startPosition, 1,3); // y/w
+            GenSlidingDiagonalMoves(ref moves, startPosition, 2,3); // z/w
         }
     }
 }
