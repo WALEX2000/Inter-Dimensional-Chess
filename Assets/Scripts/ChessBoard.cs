@@ -22,6 +22,7 @@ namespace Chess.Board {
         private List<Move> moveHistory = new List<Move>();
         private Dictionary<GameObject, List<Move>> whitePiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
         private Dictionary<GameObject, List<Move>> blackPiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
+        private List<AfterImage> enPassantGhosts = new List<AfterImage>();
         private List<GameObject> dimensionObjects = new List<GameObject>(); // TODO: Maybe move this somewhere else so this class is just about the board
 
         // Board General Methods
@@ -70,7 +71,7 @@ namespace Chess.Board {
             return new Vector3(position.x, yPos, position.z);
         }
 
-        // Piece Movement / Selection Methods
+        // Piece Movement
         public void MakeMove(Move move) {
             BoardPosition startPosition = move.startPosition;
             BoardPosition endPosition = move.endPosition;
@@ -79,16 +80,27 @@ namespace Chess.Board {
             // TODO: This isn't very good practice but it works for now
             PieceMovement pieceMovement = movedPiece.GetComponent<PieceMovement>();
             pieceMovement.MovePiece();
+
             // Delete the eaten piece, if any
-            GameObject enemyPiece = GetBoardElement(endPosition);
-            if(enemyPiece != null) {
-                if(IsElementWhite(enemyPiece)) {
-                    whitePiecesMoveCollection.Remove(enemyPiece);
-                } else if(IsElementBlack(enemyPiece)) {
-                    blackPiecesMoveCollection.Remove(enemyPiece);
+            GameObject endObj = GetBoardElement(endPosition);
+            if((move.outcome & MoveOutcome.Capture) != 0)
+            { // This is a capture move
+                GameObject objToDestroy = endObj;
+                if ((move.outcome & MoveOutcome.EnPassant) != 0) {
+                    Move lastMove = moveHistory[moveHistory.Count - 1];
+                    objToDestroy = lastMove.afterImage.afterImageOwner;
+                    BoardPosition destroyPosition = TransformIntoBoardPosition(objToDestroy.transform);
+                    boardMatrix[destroyPosition.x, destroyPosition.y, destroyPosition.z, destroyPosition.w] = null;
                 }
-                GameObject.Destroy(enemyPiece);
+
+                if(IsElementWhite(objToDestroy)) {
+                    whitePiecesMoveCollection.Remove(objToDestroy);
+                } else if(IsElementBlack(objToDestroy)) {
+                    blackPiecesMoveCollection.Remove(objToDestroy);
+                }
+                GameObject.Destroy(objToDestroy);
             }
+
             // Change the position of the selected piece on the Board Matrix
             boardMatrix[endPosition.x, endPosition.y, endPosition.z, endPosition.w] = movedPiece;
             boardMatrix[startPosition.x, startPosition.y, startPosition.z, startPosition.w] = null;
@@ -103,36 +115,49 @@ namespace Chess.Board {
             GameManager.Instance.EndTurn();
         }
 
-        // Possible Moves
-        public MoveOutcome CheckMoveRules(GameObject piece, Move move) { // Checks if Move is valid according to Board Rules
-            // TODO: Remove Debugs
-            // CHECK ALL GAME RULES
-            // Can't move into blocks
+        public void CheckMoveOutcome(GameObject piece, ref Move move) { // Checks if Move is valid according to Board Rules
             GameObject endObj = GetBoardElement(move.endPosition);
-            if (IsElementBlock(endObj)) {
-                // Debug.Log("Object at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is a block!");
-                return MoveOutcome.Invalid;
+            if (IsElementBlock(endObj))
+            { // If the end position is a block, the move is invalid
+                move.outcome = MoveOutcome.Invalid;
+                return;
             }
-            // Can't fly TODO: this doesn't work for "w" i think
+            
             BoardPosition below_end_pos = new BoardPosition(move.endPosition.x, move.endPosition.y - 1, move.endPosition.z, move.endPosition.w);
-            if(!IsElementBlock(GetBoardElement(below_end_pos))) { // This element has to be a block
-                // Debug.Log("Position at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is floating!");
-                return MoveOutcome.Invalid; // TODO This is dependent upon GetBoardElement returning null if the position is out of bounds
+            if(!IsElementBlock(GetBoardElement(below_end_pos)))
+            { // If the element below board position is not a block, the move is invalid
+                move.outcome = MoveOutcome.Invalid;
+                return;
+                // TODO This is dependent upon GetBoardElement returning null if the position is out of bounds
             }
-            // Same team piece
-            if (IsTeamEqual(piece, endObj)) {
-                // Debug.Log("Object at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is a piece of the same team!");
-                return MoveOutcome.FriendlyCapture;
+            
+            if (endObj is null)
+            { // If the end position is empty, the move is valid
+                move.outcome |= MoveOutcome.BasicMove;
+
+                if(moveHistory.Count > 0) {
+                    Move lastMove = moveHistory[moveHistory.Count - 1];
+                    if ((lastMove.outcome & MoveOutcome.AfterImage) != 0 &&
+                        lastMove.afterImage.afterImagePosition == move.endPosition &&
+                        !IsTeamEqual(piece, lastMove.afterImage.afterImageOwner))
+                    { // Passing into an enemy after image
+                        move.outcome |= MoveOutcome.EnPassant;
+                    }
+                }
             }
-            // Capture
-            if(endObj != null && !IsTeamEqual(piece, endObj)) {
-                // Debug.Log("Object at (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ") is a piece of the other team!");
-                return MoveOutcome.Capture;
+            else if (IsTeamEqual(piece, endObj))
+            { // If the end position is a piece of the same team, the move is a FriendlyCapture
+                move.outcome |= MoveOutcome.FriendlyCapture;
             }
-            // CHECK ALL DIMENSION RULES
-            // CHECK ALL PIECE SPECIFIC RULES
-            // Debug.Log("VALID: (" + move.end_position.x + "," + move.end_position.y + "," + move.end_position.z + "," + move.end_position.w + ")");
-            return MoveOutcome.Valid;
+            else if(endObj != null && !IsTeamEqual(piece, endObj))
+            { // If the end position is a piece of the opposite team, the move is a Capture
+                move.outcome |= MoveOutcome.Capture;
+            }
+
+            // TODO: Check if the move is a promotion
+            // TODO: Check if the move is a Castling
+            // TODO: Check if the move is putting my king in check
+            // TODO: Check if the move is putting the opoosing king in check
         }
 
         public List<Move> GetPieceMoves(GameObject piece) {
@@ -153,16 +178,17 @@ namespace Chess.Board {
                 foreach(PieceMovement moveable in moveables) {
                     moveable.GenerateMovesToList(ref pieceMoves);
                 }
-                foreach(Move move in pieceMoves) {
-                    // Check if there are any Checks or Checkmates
-                }
                 playerPieces[piece] = pieceMoves;
             }
         }
 
         // Misc Methods
-        public bool isKing(GameObject piece) {
+        public bool IsKing(GameObject piece) {
             return piece.tag == "k" || piece.tag == "K";
+        }
+
+        public bool IsPawn(GameObject piece) {
+            return piece.tag == "p" || piece.tag == "P";
         }
 
         public bool IsElementBlock(GameObject element) {

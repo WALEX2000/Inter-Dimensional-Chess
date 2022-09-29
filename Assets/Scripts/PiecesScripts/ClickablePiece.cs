@@ -10,7 +10,6 @@ namespace Chess.Pieces
     {
         private bool white_team = true;
         private PieceState state;
-
         private Material idle_material;
         public Material hover_materail, selected_materail; // TODO: Move materials to either a SO or the ColorTheme SO
         

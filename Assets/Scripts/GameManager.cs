@@ -6,6 +6,7 @@ namespace Chess.Game
     using Chess.Pieces;
     using Chess.Board;
     using System;
+    using UnityEngine.Events;
 
     public class GameManager : MonoBehaviour
     {
@@ -28,9 +29,11 @@ namespace Chess.Game
 
         // Constants
         public const string GUIHolderObjectName = "GUIHolder";
+        public GameObject EnPassantGhostPrefab;
 
         public ChessBoard gameBoard = new ChessBoard();
         public Transform boardTransform;
+        public UnityEvent turnEndEvent = new UnityEvent();
 
         // Game Function Methods
         public bool isWhiteTurn = true;
@@ -40,6 +43,7 @@ namespace Chess.Game
 
         public void EndTurn() {
             isWhiteTurn = !isWhiteTurn;
+            turnEndEvent.Invoke();
             StartTurn();
         }
 
@@ -61,9 +65,7 @@ namespace Chess.Game
                 moveIndicator.transform.localPosition = indicatorPositionVector;
                 moveIndicator.GetComponent<MoveIndicator>().setMove(move);
                 
-                // set capture material if move is a capture
-                GameObject capturedPiece = gameBoard.GetBoardElement(move.endPosition);
-                if (gameBoard.IsElementBlack(capturedPiece) || gameBoard.IsElementWhite(capturedPiece)) {
+                if ((move.outcome & MoveOutcome.Capture) != 0) {
                     moveIndicator.GetComponent<MoveIndicator>().setCaptureMat();
                 }
             }

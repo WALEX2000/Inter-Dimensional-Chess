@@ -31,21 +31,29 @@ namespace Chess.Pieces
         { // Go forward on axis_index and to the left/right on lateral axis
             int start_forward_axis_val = start_pos[forward_axis_index];
             BoardPosition end_pos_1 = new BoardPosition(start_pos);
-            end_pos_1.setValue(forward_axis_index, start_forward_axis_val + 1 * multiplier); // Go forward on axis_index
+            end_pos_1.SetValue(forward_axis_index, start_forward_axis_val + 1 * multiplier); // Go forward on axis_index
             BoardPosition end_pos_2 = new BoardPosition(end_pos_1);
             int start_lateral_axis_val = start_pos[lateral_axis_index];
-            end_pos_1.setValue(lateral_axis_index, start_lateral_axis_val + 1); // Go positive on lateral_axis_index
-            end_pos_2.setValue(lateral_axis_index, start_lateral_axis_val - 1); // Go negative on lateral_axis_index
+            end_pos_1.SetValue(lateral_axis_index, start_lateral_axis_val + 1); // Go positive on lateral_axis_index
+            end_pos_2.SetValue(lateral_axis_index, start_lateral_axis_val - 1); // Go negative on lateral_axis_index
             Move move_1 = new Move(start_pos, end_pos_1);
             Move move_2 = new Move(start_pos, end_pos_2);
 
-            MoveOutcome moveOutcome_1 = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move_1);
-            if(moveOutcome_1 == MoveOutcome.Capture) {
+            GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move_1);
+            if((move_1.outcome & MoveOutcome.Capture) != 0) { // Capture is an outcome
+                moves.Add(move_1);
+            } else if ((move_1.outcome & MoveOutcome.EnPassant) != 0)
+            { // En Passant is an outcome
+                move_1.outcome |= MoveOutcome.Capture;
                 moves.Add(move_1);
             }
 
-            MoveOutcome moveOutcome_2 = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move_2);
-            if(moveOutcome_2 == MoveOutcome.Capture) {
+            GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move_2);
+            if((move_2.outcome & MoveOutcome.Capture) != 0) { // Capture is an outcome
+                moves.Add(move_2);
+            } else if ((move_2.outcome & MoveOutcome.EnPassant) != 0)
+            { // En Passant is an outcome
+                move_2.outcome |= MoveOutcome.Capture;
                 moves.Add(move_2);
             }
         }
@@ -53,18 +61,20 @@ namespace Chess.Pieces
         private void GenForwardPawnMoves(ref List<Move> moves, BoardPosition start_pos, int axis_index, int multiplier = 1)
         {
             int start_axis_val = start_pos[axis_index];
-            BoardPosition end_pos = new BoardPosition(start_pos);
-            end_pos.setValue(axis_index, start_axis_val + 1 * multiplier);
-            Move move = new Move(start_pos, end_pos);
-            MoveOutcome moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
-            if (moveOutcome is MoveOutcome.Valid) moves.Add(move);
+            BoardPosition end_pos_1 = new BoardPosition(start_pos);
+            end_pos_1.SetValue(axis_index, start_axis_val + 1 * multiplier);
+            Move move = new Move(start_pos, end_pos_1);
+            GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
+            if ((move.outcome & MoveOutcome.BasicMove) != 0) moves.Add(move);
             else return;
 
             if (firstMove) {
-                end_pos.setValue(axis_index, start_axis_val + 2 * multiplier);
-                move = new Move(start_pos, end_pos);
-                moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
-                if (moveOutcome is MoveOutcome.Valid) moves.Add(move);
+                BoardPosition end_pos_2 = new BoardPosition(start_pos);
+                end_pos_2.SetValue(axis_index, start_axis_val + 2 * multiplier);
+                AfterImage afterImage = new AfterImage(this.gameObject, end_pos_1);
+                move = new Move(start_pos, end_pos_2, MoveOutcome.AfterImage, afterImage: afterImage);
+                GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
+                if ((move.outcome & MoveOutcome.BasicMove) != 0) moves.Add(move);
                 else return;
             }
         }

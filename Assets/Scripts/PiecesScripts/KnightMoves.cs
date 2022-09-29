@@ -63,10 +63,10 @@ namespace Chess.Pieces
             BoardPosition start_pos = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform); // TODO This is not good practice
             foreach (BoardPosition possible_pos in possibleMoves)
             {
-                BoardPosition new_pos = start_pos.add(possible_pos);
+                BoardPosition new_pos = start_pos.Add(possible_pos);
                 Move move = new Move(start_pos, new_pos);
-                MoveOutcome moveOutcome = GameManager.Instance.gameBoard.CheckMoveRules(this.gameObject, move);
-                if (moveOutcome == MoveOutcome.Valid || moveOutcome == MoveOutcome.Capture)
+                GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
+                if (move.outcome == MoveOutcome.BasicMove || move.outcome == MoveOutcome.Capture)
                     moves.Add(move);
             }
         }

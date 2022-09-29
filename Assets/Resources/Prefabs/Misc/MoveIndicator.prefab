@@ -114,3 +114,5 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: 0e3d06ca09fa549f8bf1f411553930a3, type: 2}
   idleMaterial: {fileID: 2100000, guid: 5d279e9c329454687aed8c1879fa8b31, type: 2}
   captureMaterial: {fileID: 2100000, guid: 89d096011a50a4771a20c69228f3918d, type: 2}
+  captureHoverMaterial: {fileID: 2100000, guid: 54b4bf33c5f2e4d30a422974f943ecf7,
+    type: 2}

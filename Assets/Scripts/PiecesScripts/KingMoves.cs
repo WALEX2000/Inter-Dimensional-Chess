@@ -40,10 +40,10 @@ namespace Chess.Pieces
             BoardPosition check_pos = new BoardPosition(start_pos);
 
             for (int i = 0; i <= 2; i++) {
-                check_pos.setValue(axis_index, start_axis_val + i);
+                check_pos.SetValue(axis_index, start_axis_val + i);
                 Move move = new Move(start_pos, check_pos);
-                MoveOutcome outcome = GameManager.Instance.gameBoard.CheckMoveRules(gameObject, move);
-                if (outcome is not MoveOutcome.Valid) return;
+                GameManager.Instance.gameBoard.CheckMoveOutcome(gameObject, ref move);
+                // TODO: Implement Castle
             }
 
             // Check if the rook is in the correct position
