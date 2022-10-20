@@ -74,12 +74,23 @@ namespace Chess.Board
     [Serializable] public struct Dimension {
         public List<BoardElement> dimensionElements;
         public ColorThemeSO colorTheme;
+        public int minDimensionRank, maxDimensionRank;
 
         // Constructor
         public Dimension(ColorThemeSO colorTheme)
         {
             dimensionElements = new List<BoardElement>();
             this.colorTheme = colorTheme;
+            minDimensionRank = 0;
+            maxDimensionRank = 0;
+        }
+
+        public void setMinDimensionRank(int minDimensionRank) {
+            this.minDimensionRank = minDimensionRank;
+        }
+
+        public void setMaxDimensionRank(int maxDimensionRank) {
+            this.maxDimensionRank = maxDimensionRank;
         }
     }
 
@@ -87,5 +98,20 @@ namespace Chess.Board
     public class BoardSO : ScriptableObject
     {
         public List<Dimension> dimensions = new List<Dimension>();
+        public (int,int,int,int) GetMaxBoardSize()
+        { // TODO: precalculate this, to optimize
+            int maxX = 0, maxY = 0, maxZ = 0, maxW = dimensions.Count;
+            foreach (Dimension dimension in dimensions)
+            {
+                foreach (BoardElement element in dimension.dimensionElements)
+                {
+                    maxX = Math.Max(maxX, element.position.x);
+                    maxY = Math.Max(maxY, element.position.y);
+                    maxZ = Math.Max(maxZ, element.position.z);
+                }
+            }
+            maxX+=2; maxY+=2; maxZ+=2;
+            return (maxX,maxY,maxZ,maxW);
+        }
     }
 }

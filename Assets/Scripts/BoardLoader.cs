@@ -9,13 +9,13 @@ namespace Chess.Game
     public class BoardLoader : MonoBehaviour
     {
         public BoardSO boardScriptableObject;
-
         private const int X_DIM_OFFSET = 10;
         private const int Y_DIM_OFFSET = 0;
         private const int Z_DIM_OFFSET = 0;
 
         private void Start()
         {
+            GameManager.Instance.CreateBoard(boardScriptableObject.GetMaxBoardSize());
             LoadDimensions();
             GameManager.Instance.StartTurn();
         }
@@ -27,11 +27,14 @@ namespace Chess.Game
                 GameObject dimensionParent = new GameObject(i.ToString());
                 dimensionParent.transform.parent = GameManager.Instance.boardTransform;
                 dimensionParent.transform.localPosition = new Vector3(i*X_DIM_OFFSET,i*Y_DIM_OFFSET,i*Z_DIM_OFFSET);
+                dimensionParent.AddComponent<DimensionObject>().colorTheme = boardScriptableObject.dimensions[i].colorTheme;
                 GameObject dimensionGUIHolder = new GameObject(GameManager.GUIHolderObjectName);
                 dimensionGUIHolder.transform.parent = dimensionParent.transform;
                 dimensionGUIHolder.transform.localPosition = Vector3.zero;
 
                 GameManager.Instance.gameBoard.AddDimensionObject(dimensionParent);
+                GameManager.Instance.gameBoard.setPromotionRank(i, boardScriptableObject.dimensions[i].maxDimensionRank, white: true);
+                GameManager.Instance.gameBoard.setPromotionRank(i, boardScriptableObject.dimensions[i].minDimensionRank, white: false);
                 InstantiateDimensionElements(boardScriptableObject.dimensions[i], dimensionParent.transform);
             }
         }
@@ -77,8 +80,6 @@ namespace Chess.Game
                         element = null;
                         break;
                 }
-
-                GameManager.Instance.gameBoard.AddBoardElement(element, position);
             }
         }
 
@@ -97,10 +98,11 @@ namespace Chess.Game
                 block.GetComponent<Renderer>().material = colorTheme.dark_block_mat;
             }
 
+            GameManager.Instance.gameBoard.AddBoardElement(block, position);
             return block;
         }
 
-        private GameObject InstantiatePiece(string piece_name, char piece_val, BoardPosition position, ColorThemeSO colorTheme, Transform parentTransform)
+        public static GameObject InstantiatePiece(string piece_name, char piece_val, BoardPosition position, ColorThemeSO colorTheme, Transform parentTransform)
         {
             GameObject piece = (GameObject)Instantiate(Resources.Load("Prefabs/Pieces/" + piece_name));
             piece.transform.parent = parentTransform;
@@ -118,6 +120,7 @@ namespace Chess.Game
                 piece.GetComponent<Renderer>().material = colorTheme.light_piece_mat;
             }
 
+            GameManager.Instance.gameBoard.AddBoardElement(piece, position);
             return piece;
         }
     }

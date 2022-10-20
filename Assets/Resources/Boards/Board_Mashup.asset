@@ -591,6 +591,8 @@ MonoBehaviour:
         z: 7
         w: 0
     colorTheme: {fileID: 11400000, guid: 9ee085ffd98604e1f91c1202d2e3eaa2, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 7
   - dimensionElements:
     - element_value: 80
       position:
@@ -1097,6 +1099,8 @@ MonoBehaviour:
         z: 7
         w: 1
     colorTheme: {fileID: 11400000, guid: 7220df8757f314d77923a404d16a6270, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 7
   - dimensionElements:
     - element_value: 35
       position:
@@ -2035,3 +2039,5 @@ MonoBehaviour:
         z: 7
         w: 2
     colorTheme: {fileID: 11400000, guid: 89b6c21eb3c9f4113a58a63d9aa68ea5, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 7

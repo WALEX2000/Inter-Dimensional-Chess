@@ -17,6 +17,7 @@ TagManager:
   - R
   - r
   - '#'
+  - '?'
   layers:
   - Default
   - TransparentFX

@@ -11,10 +11,10 @@ namespace Chess.Pieces
         BasicMove = 1, // 00000001
         Capture = 2, // 00000010
         FriendlyCapture = 4, // 00000100
-        AfterImage = 8, // 00001000 This move left an afterimage
+        AfterImage = 8, // 00001000 // This move left an afterimage
         Castle = 16, // 00010000
-        EnPassant = 32, // 00100000
-        Promotion = 64, // 01000000
+        EnPassant = 32, // 00100000 // This move landed on an afterimage
+        PromotionRank = 64, // 01000000  // This move landed on the promotion rank
     }
 
     public struct Move {

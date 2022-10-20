@@ -15,6 +15,8 @@ namespace Chess.Board {
         - Piece movement history
         */
         public readonly int[] boardBoundaries;
+        private int[] whitePromotionRanks;
+        private int[] blackPromotionRanks;
         private GameObject[,,,] boardMatrix;
         private List<Move> moveHistory = new List<Move>();
         private Dictionary<GameObject, List<Move>> whitePiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
@@ -26,6 +28,13 @@ namespace Chess.Board {
         public ChessBoard(int xSize = 12, int ySize = 12, int zSize = 12, int wSize = 6) {
             boardBoundaries = new int[] { xSize, ySize, zSize, wSize };
             boardMatrix = new GameObject[xSize, ySize, zSize, wSize];
+            whitePromotionRanks = new int[wSize];
+            blackPromotionRanks = new int[wSize];
+        }
+
+        public void setPromotionRank(int dimension, int rank, bool white) {
+            int[] promotionRanks = white ? whitePromotionRanks : blackPromotionRanks;
+            promotionRanks[dimension] = rank;
         }
 
         public void AddBoardElement(GameObject element, BoardPosition position) {
@@ -103,8 +112,15 @@ namespace Chess.Board {
             movedPiece.transform.parent = GetDimensionObject(endPosition).transform;
             Vector3 piecePosition = BoardPositionIntoVector3(endPosition);
             movedPiece.transform.localPosition = piecePosition;
-            moveHistory.Add(move);
 
+            // Handle Promotions
+            if(move.promotionType != null) {
+                // TODO: Add menu to choose promotion type
+                move.promotionType = 'Q';
+                HandlePromotion(movedPiece, endPosition, (char) move.promotionType);
+            }
+            
+            moveHistory.Add(move);
             GameManager.Instance.DeselectPiece();
             GameManager.Instance.EndTurn();
         }
@@ -148,7 +164,12 @@ namespace Chess.Board {
                 move.outcome |= MoveOutcome.Capture;
             }
 
-            // TODO: Check if the move is a promotion
+            if(IsElementWhite(piece) && move.endPosition.z == whitePromotionRanks[move.endPosition.w]) {
+                move.outcome |= MoveOutcome.PromotionRank;
+            } else if(IsElementBlack(piece) && move.endPosition.z == blackPromotionRanks[move.endPosition.w]) {
+                move.outcome |= MoveOutcome.PromotionRank;
+            }
+
             // TODO: Check if the move is a Castling
             // TODO: Check if the move is putting my king in check
             // TODO: Check if the move is putting the opoosing king in check
@@ -173,6 +194,47 @@ namespace Chess.Board {
                     moveable.GenerateMovesToList(ref pieceMoves);
                 }
                 playerPieces[piece] = pieceMoves;
+            }
+        }
+
+        private void HandlePromotion(GameObject movedPiece, BoardPosition position, char promotionType) {
+            
+            if(Char.IsLower(movedPiece.tag[0])) promotionType = Char.ToLower(promotionType);
+            else promotionType = Char.ToUpper(promotionType);
+            Transform dimension = movedPiece.transform.parent;
+            ColorThemeSO colorTheme = dimension.GetComponent<DimensionObject>().colorTheme;
+            
+            // remove from dictionary
+            if(IsElementWhite(movedPiece)) {
+                whitePiecesMoveCollection.Remove(movedPiece);
+            } else if(IsElementBlack(movedPiece)) {
+                blackPiecesMoveCollection.Remove(movedPiece);
+            }
+            boardMatrix[position.x, position.y, position.z, position.w] = null;
+            GameObject.Destroy(movedPiece);
+
+            // Create the new piece
+            switch (promotionType)
+            {
+                case 'Q':
+                case 'q':
+                    BoardLoader.InstantiatePiece("Queen", promotionType, position, colorTheme, dimension);
+                    break;
+                case 'R':
+                case 'r':
+                    BoardLoader.InstantiatePiece("Rook", promotionType, position, colorTheme, dimension);
+                    break;
+                case 'B':
+                case 'b':
+                    BoardLoader.InstantiatePiece("Bishop", promotionType, position, colorTheme, dimension);
+                    break;
+                case 'N':
+                case 'n':
+                    BoardLoader.InstantiatePiece("Knight", promotionType, position, colorTheme, dimension);
+                    break;
+                default:
+                    Debug.LogError("Invalid promotion type: " + promotionType);
+                    break;
             }
         }
 

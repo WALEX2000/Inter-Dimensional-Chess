@@ -14,9 +14,11 @@ public class GameTester : MonoBehaviour {
         // Create BoardSO
         Chess.Board.BoardSO boardSO = ScriptableObject.CreateInstance<Chess.Board.BoardSO>();
 
+        // TODO: Create board min/max boundaries and add to boardSO when doing this for real
+        int minX = Int32.MaxValue, maxX = 0, minY = Int32.MaxValue, maxY = 0, minZ = Int32.MaxValue, maxZ = 0;
         for (int w = 0; w < boards.Count; w++) {
             Dimension dimension = new Dimension(null);
-            dimension.dimensionElements = CreateBoard(boards[w], w);
+            CreateBoard(boards[w], w, ref dimension);
             boardSO.dimensions.Add(dimension);
         }
 
@@ -25,27 +27,34 @@ public class GameTester : MonoBehaviour {
         AssetDatabase.SaveAssets();
     }
 
-    private List<BoardElement> CreateBoard(Transform board, int w) {
+    private void CreateBoard(Transform board, int w, ref Dimension dimension) {
         // get children pieces of board
         Transform[] boardPieces = board.GetComponentsInChildren<Transform>();
         boardPieces = boardPieces[1..];
-        List<BoardElement> board_element_list = new List<BoardElement>();
+        List<BoardElement> boardElementList = dimension.dimensionElements;
 
         // round position of all board pieces and add to list
+        int minZ = Int32.MaxValue, maxZ = 0;
         foreach (Transform piece in boardPieces)
         {
             if(piece.tag == "#") {
                 piece.localPosition = new Vector3(Mathf.Round(piece.localPosition.x), Mathf.Round(piece.localPosition.y), Mathf.Round(piece.localPosition.z));
-                board_element_list.Add(new BoardElement(piece.tag[0], (int)piece.localPosition.x, (int)piece.localPosition.y, (int)piece.localPosition.z, w));
+                int xPos = (int)piece.localPosition.x, yPos = (int)piece.localPosition.y, zPos = (int)piece.localPosition.z;
+                boardElementList.Add(new BoardElement(piece.tag[0], xPos, yPos, zPos, w));
             } else if (piece.tag != "Untagged") {
                 int yPos = (int) Mathf.Ceil(piece.localPosition.y);
                 piece.localPosition = new Vector3(Mathf.Round(piece.localPosition.x), yPos - 0.5f, Mathf.Round(piece.localPosition.z));
-                board_element_list.Add(new BoardElement(piece.tag[0], (int)piece.localPosition.x, yPos, (int)piece.localPosition.z, w));
+                boardElementList.Add(new BoardElement(piece.tag[0], (int)piece.localPosition.x, yPos, (int)piece.localPosition.z, w));
             } else { // skip unknwon piece
                 continue;
             }
+
+            // update min/max values
+            minZ = Math.Min(minZ, (int)piece.localPosition.z);
+            maxZ = Math.Max(maxZ, (int)piece.localPosition.z);
         }
 
-        return board_element_list;
+        dimension.setMinDimensionRank(minZ);
+        dimension.setMaxDimensionRank(maxZ);
     }
 }

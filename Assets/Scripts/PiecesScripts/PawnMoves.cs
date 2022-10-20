@@ -39,6 +39,9 @@ namespace Chess.Pieces
             Move move_2 = new Move(start_pos, end_pos_2);
 
             GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move_1);
+            if ((move_1.outcome & MoveOutcome.PromotionRank) != 0) {
+                move_1.promotionType = 'P'; // P signals that the move is a pawn promotion
+            }
             if((move_1.outcome & MoveOutcome.Capture) != 0) { // Capture is an outcome
                 moves.Add(move_1);
             } else if ((move_1.outcome & MoveOutcome.EnPassant) != 0)
@@ -48,6 +51,9 @@ namespace Chess.Pieces
             }
 
             GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move_2);
+            if ((move_2.outcome & MoveOutcome.PromotionRank) != 0) {
+                move_2.promotionType = 'P'; // P signals that the move is a pawn promotion
+            }
             if((move_2.outcome & MoveOutcome.Capture) != 0) { // Capture is an outcome
                 moves.Add(move_2);
             } else if ((move_2.outcome & MoveOutcome.EnPassant) != 0)
@@ -64,6 +70,9 @@ namespace Chess.Pieces
             end_pos_1.SetValue(axis_index, start_axis_val + 1 * multiplier);
             Move move = new Move(start_pos, end_pos_1);
             GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
+            if ((move.outcome & MoveOutcome.PromotionRank) != 0) {
+                move.promotionType = 'Q';
+            }
             if ((move.outcome & MoveOutcome.BasicMove) != 0) moves.Add(move);
             else return;
 
@@ -73,6 +82,9 @@ namespace Chess.Pieces
                 AfterImage afterImage = new AfterImage(this.gameObject, end_pos_1);
                 move = new Move(start_pos, end_pos_2, MoveOutcome.AfterImage, afterImage: afterImage);
                 GameManager.Instance.gameBoard.CheckMoveOutcome(this.gameObject, ref move);
+                if ((move.outcome & MoveOutcome.PromotionRank) != 0) {
+                    move.promotionType = 'Q';
+                }
                 if ((move.outcome & MoveOutcome.BasicMove) != 0) moves.Add(move);
                 else return;
             }

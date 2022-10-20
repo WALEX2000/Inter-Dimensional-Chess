@@ -29,10 +29,13 @@ namespace Chess.Game
 
         // Constants
         public const string GUIHolderObjectName = "GUIHolder";
-        public GameObject EnPassantGhostPrefab;
 
-        public ChessBoard gameBoard = new ChessBoard();
+        public ChessBoard gameBoard;
         public Transform boardTransform;
+
+        public void CreateBoard((int,int,int,int) boardSize) {
+            gameBoard = new ChessBoard(boardSize.Item1, boardSize.Item2, boardSize.Item3, boardSize.Item4);
+        }
 
         // Game Function Methods
         public bool isWhiteTurn = true;
