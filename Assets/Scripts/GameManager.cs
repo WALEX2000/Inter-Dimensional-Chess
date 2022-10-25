@@ -5,6 +5,7 @@ namespace Chess.Game
     using UnityEngine;
     using Chess.Pieces;
     using Chess.Board;
+    using Chess.Viewer;
     using System;
     using UnityEngine.Events;
 
@@ -33,6 +34,8 @@ namespace Chess.Game
         public ChessBoard gameBoard;
         public Transform boardTransform;
 
+        public BoardViewer boardViewer;
+
         public void CreateBoard((int,int,int,int) boardSize) {
             gameBoard = new ChessBoard(boardSize.Item1, boardSize.Item2, boardSize.Item3, boardSize.Item4);
         }
@@ -41,6 +44,7 @@ namespace Chess.Game
         public bool isWhiteTurn = true;
         public void StartTurn() {
             gameBoard.CalculateTeamMoves(isWhiteTurn);
+            boardViewer.DisplayBoard();
         }
 
         public void EndTurn() {

@@ -32,6 +32,10 @@ namespace Chess.Board {
             blackPromotionRanks = new int[wSize];
         }
 
+        public GameObject[,,,] getBoardMatrix() {
+            return boardMatrix;
+        }
+
         public void setPromotionRank(int dimension, int rank, bool white) {
             int[] promotionRanks = white ? whitePromotionRanks : blackPromotionRanks;
             promotionRanks[dimension] = rank;
