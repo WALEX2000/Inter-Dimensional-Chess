@@ -36,6 +36,21 @@ namespace Chess.Board {
             return boardMatrix;
         }
 
+        public BoardPosition GetPieceBoardPosition(GameObject piece) {
+            for (int w = 0; w < boardBoundaries[3]; w++) {
+                for (int x = 0; x < boardBoundaries[0]; x++) {
+                    for (int y = 0; y < boardBoundaries[1]; y++) {
+                        for (int z = 0; z < boardBoundaries[2]; z++) {
+                            if (boardMatrix[x, y, z, w] == piece) {
+                                return new BoardPosition(x, y, z, w);
+                            }
+                        }
+                    }
+                }
+            }
+            throw new Exception("Piece not found on board");
+        }
+
         public void setPromotionRank(int dimension, int rank, bool white) {
             int[] promotionRanks = white ? whitePromotionRanks : blackPromotionRanks;
             promotionRanks[dimension] = rank;
@@ -62,12 +77,12 @@ namespace Chess.Board {
             dimensionObjects.Add(dimensionObject);
         }
 
-        public BoardPosition TransformIntoBoardPosition(Transform transform) {
-            Vector3 position = transform.localPosition;
-            int yPos = (int) Mathf.Ceil(position.y);
-            int wPos = int.Parse(transform.parent.name);
-            return new BoardPosition((int)position.x, yPos, (int)position.z, wPos);
-        }
+        // public BoardPosition TransformIntoBoardPosition(Transform transform) {
+        //     Vector3 position = transform.localPosition;
+        //     int yPos = (int) Mathf.Ceil(position.y);
+        //     int wPos = int.Parse(transform.parent.name);
+        //     return new BoardPosition((int)position.x, yPos, (int)position.z, wPos);
+        // }
 
         private GameObject GetDimensionObject(BoardPosition position) { // TODO: Handle IndexOutOfRange.
             return dimensionObjects[position.w];
@@ -96,7 +111,7 @@ namespace Chess.Board {
                 if ((move.outcome & MoveOutcome.EnPassant) != 0) {
                     Move lastMove = moveHistory[moveHistory.Count - 1];
                     objToDestroy = lastMove.afterImage.afterImageOwner;
-                    BoardPosition destroyPosition = TransformIntoBoardPosition(objToDestroy.transform);
+                    BoardPosition destroyPosition = GetPieceBoardPosition(objToDestroy);
                     boardMatrix[destroyPosition.x, destroyPosition.y, destroyPosition.z, destroyPosition.w] = null;
                 }
 
@@ -125,7 +140,7 @@ namespace Chess.Board {
             }
             
             moveHistory.Add(move);
-            GameManager.Instance.DeselectPiece();
+            GameManager.Instance.boardViewer.DeselectPiece();
             GameManager.Instance.EndTurn();
         }
 

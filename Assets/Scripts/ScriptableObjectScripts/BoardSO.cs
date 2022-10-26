@@ -5,6 +5,8 @@ namespace Chess.Board
     using System;
     using UnityEngine;
 
+    public enum BoardAxis { X, Y, Z, W };
+
     [Serializable] public struct BoardPosition {
         public int x, y, z, w;
         public BoardPosition(int x, int y, int z, int w) {

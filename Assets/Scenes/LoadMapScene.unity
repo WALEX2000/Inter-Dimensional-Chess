@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 864695373}
   - component: {fileID: 864695372}
   m_Layer: 0
-  m_Name: BoardViewer
+  m_Name: BoardInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,10 +149,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 864695371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7761e3d49f94d499fbdb6f4c34e28b9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 703a63a1060a04646aae240dea8e01e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraDimensionValue: 1
+  boardInterfacePool: {fileID: 1055779021}
+  fourthDimensionAxis: 3
+  fourthDimensionValue: 2
+  display: 0
 --- !u!4 &864695373
 Transform:
   m_ObjectHideFlags: 0
@@ -198,6 +201,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1055779020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1055779021}
+  m_Layer: 0
+  m_Name: BoardInterfacePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1055779021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055779020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1192886518
 GameObject:

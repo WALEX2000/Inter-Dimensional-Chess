@@ -40,7 +40,7 @@ namespace Chess.Pieces
     {
         protected bool firstMove = true;
         public void GenerateMovesToList(ref List<Move> pieceMoves) {
-            BoardPosition startPosition = GameManager.Instance.gameBoard.TransformIntoBoardPosition(this.transform);
+            BoardPosition startPosition = GameManager.Instance.gameBoard.GetPieceBoardPosition(this.gameObject);
             GenerateMovesToListImplementation(ref pieceMoves, startPosition);
         }
         public abstract void GenerateMovesToListImplementation(ref List<Move> pieceMoves, BoardPosition startPosition);
