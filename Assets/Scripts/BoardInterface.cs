@@ -68,15 +68,16 @@ namespace Chess.Interface
             List<Move> possibleMoves = GameManager.Instance.gameBoard.GetPieceMoves(piece.gameObject);
 
             foreach(Move move in possibleMoves) {
-                BoardPosition indicatorPosition = move.endPosition;
-
                 // check if indicatorPosition is in the current 4th dimension slice
-                if(indicatorPosition[(int)fourthDimensionAxis] != fourthDimensionValue) {
+                if(move.endPosition[(int)fourthDimensionAxis] != fourthDimensionValue) {
                     continue;
                 }
+                int firstDimensionIndex = (int)fourthDimensionAxis == 0 ? 3 : 0;
+                int secondDimensionIndex = (int)fourthDimensionAxis == 1 ? 3 : 1;
+                int thirdimensionIndex = (int)fourthDimensionAxis == 2 ? 3 : 2;
                 
                 GameObject moveIndicator = GameObject.Instantiate(moveIndicatorPrefab, MoveSelectionGUI);
-                Vector3 indicatorPositionVector = new Vector3(indicatorPosition.x, indicatorPosition.y + 0.001f, indicatorPosition.z);
+                Vector3 indicatorPositionVector = new Vector3(move.endPosition[firstDimensionIndex], move.endPosition[secondDimensionIndex] + 0.001f, move.endPosition[thirdimensionIndex]);
                 moveIndicator.transform.localPosition = indicatorPositionVector;
                 moveIndicator.GetComponent<MoveIndicator>().setMove(move);
                 
