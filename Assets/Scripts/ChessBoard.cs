@@ -140,7 +140,7 @@ namespace Chess.Board {
             }
             
             moveHistory.Add(move);
-            GameManager.Instance.boardViewer.DeselectPiece();
+            GameManager.Instance.boardInterface.DeselectPiece();
             GameManager.Instance.EndTurn();
         }
 

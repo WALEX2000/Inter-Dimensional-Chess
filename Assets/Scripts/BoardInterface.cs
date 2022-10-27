@@ -26,6 +26,27 @@ namespace Chess.Interface
             }
         }
 
+        public void SwitchFourthDimensionAxis(BoardAxis newAxis) {
+            fourthDimensionAxis = newAxis;
+            fourthDimensionValue = 0;
+            DisplayBoard();
+        }
+
+        public void CycleFourthDimension(int value) {
+            fourthDimensionValue+=value;
+            int maxDimValue = GameManager.Instance.gameBoard.boardBoundaries[(int)fourthDimensionAxis];
+            Debug.Log($"Boundaries: [{GameManager.Instance.gameBoard.boardBoundaries[0]}, {GameManager.Instance.gameBoard.boardBoundaries[1]}, {GameManager.Instance.gameBoard.boardBoundaries[2]}, {GameManager.Instance.gameBoard.boardBoundaries[3]}]");
+            Debug.Log("Max: " + maxDimValue);
+            Debug.Log("Initial Value: " + fourthDimensionValue);
+            if(fourthDimensionValue >= maxDimValue) {
+                fourthDimensionValue = 0;
+            } else if (fourthDimensionValue < 0) {
+                fourthDimensionValue = maxDimValue - 1;
+            }
+            Debug.Log("Final Value: " + fourthDimensionValue);
+            DisplayBoard();
+        }
+
         public void DisplayBoard() {
             DeselectPiece();
             while (transform.childCount > 0) {

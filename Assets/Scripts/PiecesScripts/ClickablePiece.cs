@@ -112,7 +112,7 @@ namespace Chess.Pieces
         }
 
         private void EnterSelected() {
-            GameManager.Instance.boardViewer.SelectPiece(this);
+            GameManager.Instance.boardInterface.SelectPiece(this);
             this.GetComponent<MeshRenderer>().material = selected_materail;
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Chess.Game;
 
 public class CameraController : MonoBehaviour
 {
@@ -18,13 +19,27 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Zoom(Input.GetAxis("Mouse ScrollWheel"));
+        if(!Input.GetKey(KeyCode.LeftAlt) && !Input.GetKey(KeyCode.LeftApple)) {
+            Zoom(Input.GetAxis("Mouse ScrollWheel"));
+        } else {
+            DimensionScroll(Input.GetAxis("Mouse ScrollWheel"));
+        }
         if(!Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)) {
             CamOrbit(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
         } else if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)) {
             CamPan(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
         transform.LookAt(focal_point);
+    }
+
+    void DimensionScroll(float scroll) {
+        if(scroll > 0) {
+            //scroll up
+            GameManager.Instance.boardInterface.CycleFourthDimension(1);
+        } else if (scroll < 0) {
+            //scroll down
+            GameManager.Instance.boardInterface.CycleFourthDimension(-1);
+        }
     }
 
     void CamPan(float x, float y) {
