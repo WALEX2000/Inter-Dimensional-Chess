@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 43
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1867,6 +1867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c074e412db6694b96b9cecf72ca36723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axisText: {fileID: 7467277208363231403}
+  xAxis: {fileID: 7703302262061539863}
+  yAxis: {fileID: 4100428180527901935}
+  zAxis: {fileID: 7699214403087098021}
+  wAxis: {fileID: 1899089330735732923}
 --- !u!1 &9093028306588096638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,7 +1938,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: '0
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
