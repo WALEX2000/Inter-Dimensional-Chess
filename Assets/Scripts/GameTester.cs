@@ -8,6 +8,7 @@ using Chess.Board;
 
 public class GameTester : MonoBehaviour {
     public List<Transform> boards = new List<Transform>();
+    public ColorThemeSO[] themes;
     public string boardName = "Test_Board";
     // Start is called before the first frame update
     private void Start() {
@@ -17,7 +18,7 @@ public class GameTester : MonoBehaviour {
         // TODO: Create board min/max boundaries and add to boardSO when doing this for real
         int minX = Int32.MaxValue, maxX = 0, minY = Int32.MaxValue, maxY = 0, minZ = Int32.MaxValue, maxZ = 0;
         for (int w = 0; w < boards.Count; w++) {
-            Dimension dimension = new Dimension(null);
+            Dimension dimension = new Dimension(themes[w]);
             CreateBoard(boards[w], w, ref dimension);
             boardSO.dimensions.Add(dimension);
         }
@@ -29,13 +30,11 @@ public class GameTester : MonoBehaviour {
 
     private void CreateBoard(Transform board, int w, ref Dimension dimension) {
         // get children pieces of board
-        Transform[] boardPieces = board.GetComponentsInChildren<Transform>();
-        boardPieces = boardPieces[1..];
         List<BoardElement> boardElementList = dimension.dimensionElements;
 
         // round position of all board pieces and add to list
         int minZ = Int32.MaxValue, maxZ = 0;
-        foreach (Transform piece in boardPieces)
+        foreach (Transform piece in board)
         {
             if(piece.tag == "#") {
                 piece.localPosition = new Vector3(Mathf.Round(piece.localPosition.x), Mathf.Round(piece.localPosition.y), Mathf.Round(piece.localPosition.z));

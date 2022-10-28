@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed696138c5f5490abb6a510467edf68, type: 3}
+  m_Name: GreenTheme
+  m_EditorClassIdentifier: 
+  light_block_mat: {fileID: 2100000, guid: e2ce19703126a477fb95f1ff22a77767, type: 2}
+  dark_block_mat: {fileID: 2100000, guid: 51ea8bd6eb19543d6872420ec4db0c36, type: 2}
+  light_piece_mat: {fileID: 2100000, guid: 8836b44aa99d048ffa9a72774fbbcec4, type: 2}
+  dark_piece_mat: {fileID: 2100000, guid: 0709f89b0b1c0468084ba82e06fd5560, type: 2}
