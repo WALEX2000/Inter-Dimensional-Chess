@@ -29,26 +29,29 @@ namespace Chess.Interface
         public void SwitchFourthDimensionAxis(BoardAxis newAxis) {
             fourthDimensionAxis = newAxis;
             fourthDimensionValue = 0;
+            if(selectedPiece is not null) {
+                BoardPosition piecePosition = GameManager.Instance.gameBoard.GetPieceBoardPosition(selectedPiece.gameObject);
+                fourthDimensionValue = piecePosition[((int)fourthDimensionAxis)];
+            }
             DisplayBoard();
         }
 
         public void CycleFourthDimension(int value) {
             fourthDimensionValue+=value;
             int maxDimValue = GameManager.Instance.gameBoard.boardBoundaries[(int)fourthDimensionAxis];
-            Debug.Log($"Boundaries: [{GameManager.Instance.gameBoard.boardBoundaries[0]}, {GameManager.Instance.gameBoard.boardBoundaries[1]}, {GameManager.Instance.gameBoard.boardBoundaries[2]}, {GameManager.Instance.gameBoard.boardBoundaries[3]}]");
-            Debug.Log("Max: " + maxDimValue);
-            Debug.Log("Initial Value: " + fourthDimensionValue);
             if(fourthDimensionValue >= maxDimValue) {
                 fourthDimensionValue = 0;
             } else if (fourthDimensionValue < 0) {
                 fourthDimensionValue = maxDimValue - 1;
             }
-            Debug.Log("Final Value: " + fourthDimensionValue);
             DisplayBoard();
         }
 
         public void DisplayBoard() {
-            DeselectPiece();
+            if(selectedPiece is not null) {
+                print("Selected piece is not null");
+                SelectPiece(selectedPiece);
+            }
             while (transform.childCount > 0) {
                 Transform child = transform.GetChild(0);
                 child.parent = boardInterfacePool;
@@ -85,7 +88,13 @@ namespace Chess.Interface
         public void SelectPiece(ClickablePiece piece) {
             DeselectPiece(); // deselect previous piece
 
+            BoardPosition piecePosition = GameManager.Instance.gameBoard.GetPieceBoardPosition(piece.gameObject);
+            if(piecePosition[(int)fourthDimensionAxis] != fourthDimensionValue) {
+                return;
+            }
+
             selectedPiece = piece;
+            piece.ForceSelectMat();
             List<Move> possibleMoves = GameManager.Instance.gameBoard.GetPieceMoves(piece.gameObject);
 
             foreach(Move move in possibleMoves) {

@@ -82,6 +82,10 @@ namespace Chess.Pieces
             ExecuteState(ClickablePieceStateMachine.ApplyCommand(state, PieceCommand.Deselect));
         }
 
+        public void ForceSelectMat() { // TODO this is a weird woraround, fix it
+            this.GetComponent<MeshRenderer>().material = selected_materail;
+        }
+
         private void ExecuteState(PieceState? nextState) {
             if(nextState == null) return;
             else state = nextState.Value;
@@ -102,7 +106,6 @@ namespace Chess.Pieces
         }
 
         private void EnterIdle() {
-            // TODO: Change color to default
             this.GetComponent<MeshRenderer>().material = idle_material;
         }
 

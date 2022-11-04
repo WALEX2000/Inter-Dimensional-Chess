@@ -20,6 +20,7 @@ namespace Chess.Pieces
         PlayerClick,
         EnemyClick,
         Deselect,
+        Select,
     }
 
     public static class ClickablePieceStateMachine
@@ -29,13 +30,16 @@ namespace Chess.Pieces
                 { PieceCommand.PlayerEnter, PieceState.Hovered },
                 { PieceCommand.PlayerHover, PieceState.Hovered },
                 { PieceCommand.PlayerClick, PieceState.Selected },
+                { PieceCommand.Select, PieceState.Selected },
             },
             new Dictionary<PieceCommand, PieceState>() { // Hovered
                 { PieceCommand.PlayerLeave, PieceState.Idle },
                 { PieceCommand.PlayerClick, PieceState.Selected },
+                { PieceCommand.Select, PieceState.Selected },
             },
             new Dictionary<PieceCommand, PieceState>() { // Selected
                 { PieceCommand.Deselect, PieceState.Idle },
+                { PieceCommand.Select, PieceState.Selected },
             },
             new Dictionary<PieceCommand, PieceState>() { // Played
 
