@@ -1,0 +1,2319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a15f56e00f1a4f5683d07789a9b2f6d, type: 3}
+  m_Name: Test_Board_6
+  m_EditorClassIdentifier: 
+  dimensions:
+  - dimensionElements:
+    - element_value: 80
+      position:
+        x: 0
+        y: 1
+        z: 1
+        w: 0
+    - element_value: 80
+      position:
+        x: 5
+        y: 1
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 112
+      position:
+        x: 5
+        y: 1
+        z: 4
+        w: 0
+    - element_value: 112
+      position:
+        x: 0
+        y: 1
+        z: 4
+        w: 0
+    - element_value: 82
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 0
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 0
+    - element_value: 114
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 3
+        w: 0
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 2
+        w: 0
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 3
+        w: 0
+    colorTheme: {fileID: 11400000, guid: 610a6a409213d40beac1b988ab238527, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5
+  - dimensionElements:
+    - element_value: 66
+      position:
+        x: 3
+        y: 2
+        z: 0
+        w: 1
+    - element_value: 80
+      position:
+        x: 1
+        y: 1
+        z: 1
+        w: 1
+    - element_value: 80
+      position:
+        x: 4
+        y: 1
+        z: 1
+        w: 1
+    - element_value: 112
+      position:
+        x: 4
+        y: 1
+        z: 4
+        w: 1
+    - element_value: 112
+      position:
+        x: 1
+        y: 1
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 1
+    - element_value: 98
+      position:
+        x: 3
+        y: 2
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 0
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 1
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 2
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 3
+        w: 1
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 4
+        w: 1
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 5
+        w: 1
+    colorTheme: {fileID: 11400000, guid: 9ee085ffd98604e1f91c1202d2e3eaa2, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5
+  - dimensionElements:
+    - element_value: 80
+      position:
+        x: 4
+        y: 1
+        z: 0
+        w: 2
+    - element_value: 75
+      position:
+        x: 3
+        y: 2
+        z: 0
+        w: 2
+    - element_value: 78
+      position:
+        x: 2
+        y: 2
+        z: 0
+        w: 2
+    - element_value: 112
+      position:
+        x: 4
+        y: 1
+        z: 5
+        w: 2
+    - element_value: 107
+      position:
+        x: 3
+        y: 2
+        z: 5
+        w: 2
+    - element_value: 110
+      position:
+        x: 2
+        y: 2
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 3
+        w: 2
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 2
+        w: 2
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 3
+        w: 2
+    colorTheme: {fileID: 11400000, guid: 89b6c21eb3c9f4113a58a63d9aa68ea5, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5
+  - dimensionElements:
+    - element_value: 80
+      position:
+        x: 2
+        y: 1
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 112
+      position:
+        x: 2
+        y: 1
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 78
+      position:
+        x: 2
+        y: 2
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 2
+        w: 3
+    - element_value: 81
+      position:
+        x: 3
+        y: 2
+        z: 0
+        w: 3
+    - element_value: 113
+      position:
+        x: 3
+        y: 2
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 0
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 3
+        w: 3
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 5
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 2
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 1
+        w: 3
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 4
+        w: 3
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 1
+        w: 3
+    - element_value: 110
+      position:
+        x: 2
+        y: 2
+        z: 5
+        w: 3
+    colorTheme: {fileID: 11400000, guid: 98ed216243526492ba9697af6ba19165, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5
+  - dimensionElements:
+    - element_value: 66
+      position:
+        x: 3
+        y: 2
+        z: 0
+        w: 4
+    - element_value: 80
+      position:
+        x: 2
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 80
+      position:
+        x: 3
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 112
+      position:
+        x: 3
+        y: 2
+        z: 4
+        w: 4
+    - element_value: 112
+      position:
+        x: 2
+        y: 2
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 98
+      position:
+        x: 3
+        y: 2
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 2
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 3
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 2
+        w: 4
+    - element_value: 80
+      position:
+        x: 4
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 80
+      position:
+        x: 1
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 112
+      position:
+        x: 1
+        y: 2
+        z: 4
+        w: 4
+    - element_value: 112
+      position:
+        x: 4
+        y: 2
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 2
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 2
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 2
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 2
+        z: 0
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 2
+        z: 1
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 1
+        y: 2
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 2
+        z: 4
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 2
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 0
+        y: 2
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 4
+        y: 2
+        z: 5
+        w: 4
+    - element_value: 35
+      position:
+        x: 5
+        y: 2
+        z: 4
+        w: 4
+    colorTheme: {fileID: 11400000, guid: 7220df8757f314d77923a404d16a6270, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5
+  - dimensionElements:
+    - element_value: 80
+      position:
+        x: 4
+        y: 1
+        z: 1
+        w: 5
+    - element_value: 112
+      position:
+        x: 4
+        y: 1
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 0
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 114
+      position:
+        x: 3
+        y: 2
+        z: 5
+        w: 5
+    - element_value: 82
+      position:
+        x: 3
+        y: 2
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 2
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 2
+        w: 5
+    - element_value: 35
+      position:
+        x: 0
+        y: 1
+        z: 4
+        w: 5
+    - element_value: 35
+      position:
+        x: 3
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 3
+        w: 5
+    - element_value: 35
+      position:
+        x: 5
+        y: 1
+        z: 1
+        w: 5
+    - element_value: 35
+      position:
+        x: 4
+        y: 1
+        z: 0
+        w: 5
+    - element_value: 35
+      position:
+        x: 1
+        y: 1
+        z: 5
+        w: 5
+    - element_value: 80
+      position:
+        x: 1
+        y: 1
+        z: 1
+        w: 5
+    - element_value: 112
+      position:
+        x: 1
+        y: 1
+        z: 4
+        w: 5
+    colorTheme: {fileID: 11400000, guid: f2791f0834b064e41929f848f7e28609, type: 2}
+    minDimensionRank: 0
+    maxDimensionRank: 5

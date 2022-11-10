@@ -49,7 +49,6 @@ namespace Chess.Interface
 
         public void DisplayBoard() {
             if(selectedPiece is not null) {
-                print("Selected piece is not null");
                 SelectPiece(selectedPiece);
             }
             while (transform.childCount > 0) {
@@ -75,6 +74,24 @@ namespace Chess.Interface
                         if(piece != null) {
                             piece.transform.parent = this.transform;
                             piece.transform.localPosition = new Vector3(i, j, k);
+                        }
+                    }
+                }
+            }
+
+            // Display towers
+            if(fourthDimensionAxis is BoardAxis.Y) return;
+            GameObject[,,,] towerMatrix = GameManager.Instance.gameBoard.getTowerMatrix();
+            for(int i = 0; i < towerMatrix.GetLength(firstDimensionIndex); i++) {
+                for(int j = 0; j < towerMatrix.GetLength(secondDimensionIndex); j++) {
+                    for(int k = 0; k < towerMatrix.GetLength(thirdimensionIndex); k++) {
+                        position[firstDimensionIndex] = i;
+                        position[secondDimensionIndex] = j;
+                        position[thirdimensionIndex] = k;
+                        GameObject tower = (GameObject) towerMatrix.GetValue(position);
+                        if(tower != null) {
+                            tower.transform.parent = this.transform;
+                            tower.transform.localPosition = new Vector3(i, j-towerMatrix.GetLength(1), k);
                         }
                     }
                 }

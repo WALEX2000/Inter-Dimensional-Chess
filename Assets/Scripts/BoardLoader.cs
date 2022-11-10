@@ -81,9 +81,11 @@ namespace Chess.Game
                         break;
                 }
             }
+            int w = dimension.dimensionElements[0].position.w;
+            InstatiateTower(dimension.colorTheme, parentTransform, w);
         }
 
-        private GameObject InstantiateBlock(string block_name, BoardPosition position, ColorThemeSO colorTheme, Transform parentTransform)
+        private GameObject InstantiateBlock(string block_name, BoardPosition position, ColorThemeSO colorTheme, Transform parentTransform, bool addToBoard = true)
         {
             GameObject block = (GameObject)Instantiate(Resources.Load("Prefabs/Blocks/" + block_name));
             block.transform.parent = parentTransform;
@@ -98,8 +100,19 @@ namespace Chess.Game
                 block.GetComponent<Renderer>().material = colorTheme.dark_block_mat;
             }
 
-            GameManager.Instance.gameBoard.AddBoardElement(block, position);
+            if(addToBoard) GameManager.Instance.gameBoard.AddBoardElement(block, position);
+            else GameManager.Instance.gameBoard.AddTowerBlock(block, position);
             return block;
+        }
+
+        private void InstatiateTower(ColorThemeSO colorTheme, Transform parentTransform, int dimension) {
+            for(int y = 0; y <= 21; y++) {
+                for(int x = 0; x < 6; x++) {
+                    for(int z = 0; z < 6; z++) {
+                        InstantiateBlock("Block", new BoardPosition(x, y, z, dimension), colorTheme, parentTransform, addToBoard: false);
+                    }
+                }
+            }
         }
 
         public static GameObject InstantiatePiece(string piece_name, char piece_val, BoardPosition position, ColorThemeSO colorTheme, Transform parentTransform)

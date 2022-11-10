@@ -23,17 +23,23 @@ namespace Chess.Board {
         private Dictionary<GameObject, List<Move>> blackPiecesMoveCollection = new Dictionary<GameObject, List<Move>>();
         private List<AfterImage> enPassantGhosts = new List<AfterImage>();
         private List<GameObject> dimensionObjects = new List<GameObject>(); // TODO: Maybe move this somewhere else so this class is just about the board
+        private GameObject[,,,] towerMatrix;
 
         // Board General Methods
         public ChessBoard(int xSize = 12, int ySize = 12, int zSize = 12, int wSize = 6) {
             boardBoundaries = new int[] { xSize, ySize, zSize, wSize };
             boardMatrix = new GameObject[xSize, ySize, zSize, wSize];
+            towerMatrix = new GameObject[7, 22, 7, wSize];
             whitePromotionRanks = new int[wSize];
             blackPromotionRanks = new int[wSize];
         }
 
         public GameObject[,,,] getBoardMatrix() {
             return boardMatrix;
+        }
+
+        public GameObject[,,,] getTowerMatrix() {
+            return towerMatrix;
         }
 
         public BoardPosition GetPieceBoardPosition(GameObject piece) {
@@ -63,6 +69,9 @@ namespace Chess.Board {
             } else if(IsElementBlack(element)) {
                 blackPiecesMoveCollection.Add(element, new List<Move>());
             }
+        }
+        public void AddTowerBlock(GameObject block, BoardPosition position) {
+            towerMatrix[position.x, position.y, position.z, position.w] = block;
         }
 
         public GameObject GetBoardElement(BoardPosition pos) {

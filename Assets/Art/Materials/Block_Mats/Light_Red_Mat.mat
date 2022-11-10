@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dark_Blue_Mat
+  m_Name: Light_Red_Mat
   m_Shader: {fileID: 4800000, guid: 8516d7a69675844a7a0b7095af7c46af, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -123,10 +123,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.040850837, g: 0.29008028, b: 0.3207547, a: 1}
+    - _BaseColor: {r: 0.7735849, g: 0.5801887, b: 0.5801887, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.04085082, g: 0.29008025, b: 0.32075468, a: 1}
+    - _Color: {r: 0.7735849, g: 0.58018863, b: 0.58018863, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

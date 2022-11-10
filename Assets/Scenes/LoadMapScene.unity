@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bb820e701794ef891f316afd80b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardScriptableObject: {fileID: 11400000, guid: 6e15695dc14e34c3393607049986e581,
+  boardScriptableObject: {fileID: 11400000, guid: 18112fba5608640549b7a683cfb579b6,
     type: 2}
 --- !u!4 &1772538638
 Transform:
